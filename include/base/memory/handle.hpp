@@ -101,5 +101,6 @@ namespace base::memory
 	struct handles
 	{
 		inline static auto const c_text_start = handle(0x100000);
+		inline static auto ctrpf_shared_hid_mem = handle(0x1FF81000);
 	};
 }
