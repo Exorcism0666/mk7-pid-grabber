@@ -26,6 +26,7 @@ namespace base
         static u32 get_player_amount(bool);
         static bool is_local_client(u32, bool);
         static bool is_duplicate(std::vector<PlayerInfo>, PlayerInfo);
-        static std::vector<PlayerInfo> get_player_list(bool, bool);
+        static std::vector<PlayerInfo> get_player_list(bool, bool, bool);
+        static bool is_connected(u8);
     };
 }
