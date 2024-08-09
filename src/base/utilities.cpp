@@ -1,6 +1,7 @@
 #include <base/utilities.hpp>
 
 #include <base/pointers.hpp>
+#include <base/menu.hpp>
 
 #include <CTRPluginFramework.hpp>
 
@@ -124,8 +125,10 @@ namespace base
         return list;
     }
     
-    nn::nex::Station * utilities::get_station_from_list(std::vector<nn::nex::Station *> list, u32 station_id)
+    nn::nex::Station * utilities::get_station_from_list(u32 station_id)
     {
+        auto list = g_menu->station_list;
+
         if (station_id && !list.empty())
             for (auto station : list)
                 if (station)
@@ -133,6 +136,35 @@ namespace base
                         return station;
         
         return {};
+    }
+
+    std::vector<PlayerInfo> utilities::get_player_list()
+    {
+        std::vector<PlayerInfo> list{};
+
+        for (size_t i = 0; i < utilities::get_player_amount(false); i++)
+        {
+            if (utilities::is_local_client(i, false))
+                continue;
+
+            auto player_data = utilities::get_network_player_data(i);
+            
+            std::string name = utilities::parse_name(player_data);
+
+            bool loaded = (utilities::is_connected(i) && player_data->loaded);
+
+            PlayerInfo player = { i, loaded, { name, player_data->principal_id }, player_data };
+
+            if (utilities::is_duplicate(list, player))
+            {
+                player.info.name = "Player";
+                player.loaded = false;
+            }
+
+            list.push_back(player);
+        }
+
+        return list;
     }
 
     u32 utilities::get_principal_id(nn::nex::Station *station)
@@ -219,35 +251,6 @@ namespace base
     bool utilities::is_duplicate(std::vector<PlayerInfo> list, PlayerInfo player)
     {
         return (std::find(list.begin(), list.end(), player) != list.end());
-    }
-
-    std::vector<PlayerInfo> utilities::get_player_list(bool exclude_local_client, bool exclude_duplicates, bool check_connected)
-    {
-        std::vector<PlayerInfo> list{};
-
-        for (size_t i = 0; i < utilities::get_player_amount(false); i++)
-        {
-            if (exclude_local_client && utilities::is_local_client(i, false))
-                continue;
-
-            auto player_data = utilities::get_network_player_data(i);
-            
-            std::string name = utilities::parse_name(player_data);
-
-            bool loaded = (check_connected ? utilities::is_connected(i) && player_data->loaded : player_data->loaded);
-
-            PlayerInfo player = { i, loaded, { name, player_data->principal_id }, player_data };
-
-            if (exclude_duplicates && utilities::is_duplicate(list, player))
-            {
-                player.info.name = "Player";
-                player.loaded = false;
-            }
-
-            list.push_back(player);
-        }
-
-        return list;
     }
 
     bool utilities::is_connected(u8 player_id)

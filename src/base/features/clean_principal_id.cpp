@@ -11,7 +11,7 @@ namespace base
 {
     void features::clean_principal_id()
     {
-        auto list = utilities::get_player_list(true, true, true);
+        auto list = utilities::get_player_list();
 
         if (list.empty())
             utilities::print_error("Could not fetch the player list\n\nOperation: Reading the target", true);
@@ -22,7 +22,7 @@ namespace base
             {
                 u32 station_id = utilities::get_station_id(player.id, true);
 
-                auto station = utilities::get_station_from_list(g_menu->station_list, station_id);
+                auto station = utilities::get_station_from_list(station_id);
 
                 if (!station)
                     utilities::print_error("Could not fetch Station\n\nOperation: Cleaning the PID", true);

@@ -11,7 +11,7 @@ namespace base
     {
         if ((*g_pointers->m_network_engine)->local_player_id != UINT32_MAX && utilities::get_player_amount(true) != 0)
         {
-            auto list = utilities::get_player_list(true, true, true);
+            auto list = utilities::get_player_list();
 
             if (list.empty())
                 utilities::print_error("Could not fetch the player list\n\nOperation: Reading the target", true);
@@ -43,7 +43,7 @@ namespace base
 
                     u32 clean_pid{};
 
-                    if (auto station = utilities::get_station_from_list(g_menu->station_list, utilities::get_station_id(player.id, true)))
+                    if (auto station = utilities::get_station_from_list(utilities::get_station_id(player.id, true)))
                     {
 						if (station->station_id != utilities::get_station_id(player.id, true))
                             utilities::print_error("Could not match the Station ID\n\nOperation: Reading the target", true);

@@ -25,7 +25,7 @@ namespace base
             
             session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), network_engine->local_player_id);
 
-            std::vector<PlayerInfo> list = utilities::get_player_list(true, true, true);
+            auto list = utilities::get_player_list();
 
             if (list.empty())
                 utilities::print_error("Could not fetch the player list\n\nOperation: Logging the Session", true);
@@ -38,7 +38,7 @@ namespace base
                 {
                     u32 station_id = utilities::get_station_id(player.id, true);
 
-                    auto station = utilities::get_station_from_list(g_menu->station_list, station_id);
+                    auto station = utilities::get_station_from_list(station_id);
 
                     if (!station)
                         utilities::print_error("Could not fetch the Station\n\nOperation: Logging the Session", true);
