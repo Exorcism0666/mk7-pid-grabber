@@ -19,14 +19,14 @@ namespace base
         static u32 get_station_id(u8, bool);
         static nn::nex::Station * get_station(u32);
         static std::vector<nn::nex::Station *> get_station_list();
-        static nn::nex::Station * get_station_from_list(std::vector<nn::nex::Station *>, u32);
+        static nn::nex::Station * get_station_from_list(u32);
+        static std::vector<PlayerInfo> get_player_list();
         static u32 get_principal_id(nn::nex::Station *);
         static u32 get_principal_id(u8);
         static u32 get_my_principal_id();
         static u32 get_player_amount(bool);
         static bool is_local_client(u32, bool);
         static bool is_duplicate(std::vector<PlayerInfo>, PlayerInfo);
-        static std::vector<PlayerInfo> get_player_list(bool, bool, bool);
         static bool is_connected(u8);
     };
 }
