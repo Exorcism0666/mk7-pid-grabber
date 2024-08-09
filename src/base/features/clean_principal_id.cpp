@@ -11,7 +11,7 @@ namespace base
 {
     void features::clean_principal_id()
     {
-        auto list = utilities::get_player_list(true, true);
+        auto list = utilities::get_player_list(true, true, true);
 
         if (list.empty())
             utilities::print_error("Could not fetch the player list\n\nOperation: Reading the target", true);

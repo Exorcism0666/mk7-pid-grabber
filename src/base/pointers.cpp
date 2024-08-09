@@ -83,6 +83,11 @@ namespace base
 			m_Sequence_MenuWiFi_Confirm_onPageEnter = handle.as<decltype(m_Sequence_MenuWiFi_Confirm_onPageEnter)>();
 		});
 
+		batch.add("Net::NetworkStationBufferManager::isDisconnected", "01 00 71 E3 09 00 00 0A 7C 20 90 E5 80 00 90 E5 01 00 52 E1 81 10 81 80 01 01 80 80 00 00 90 E5", [this](memory::handle handle)
+		{
+			is_disconnected = reinterpret_cast<decltype(is_disconnected)>(handle.as<bool *>());
+		});
+
 		batch.run(memory::ranges::c_text);
 
 		g_pointers = this;

@@ -25,7 +25,7 @@ namespace base
             
             session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), network_engine->local_player_id);
 
-            std::vector<PlayerInfo> list = utilities::get_player_list(true, true);
+            std::vector<PlayerInfo> list = utilities::get_player_list(true, true, true);
 
             if (list.empty())
                 utilities::print_error("Could not fetch the player list\n\nOperation: Logging the Session", true);

@@ -221,7 +221,7 @@ namespace base
         return (std::find(list.begin(), list.end(), player) != list.end());
     }
 
-    std::vector<PlayerInfo> utilities::get_player_list(bool exclude_local_client, bool exclude_duplicates)
+    std::vector<PlayerInfo> utilities::get_player_list(bool exclude_local_client, bool exclude_duplicates, bool check_connected)
     {
         std::vector<PlayerInfo> list{};
 
@@ -234,7 +234,9 @@ namespace base
             
             std::string name = utilities::parse_name(player_data);
 
-            PlayerInfo player = { i, player_data->loaded, { name, player_data->principal_id }, player_data };
+            bool loaded = (check_connected ? utilities::is_connected(i) && player_data->loaded : player_data->loaded);
+
+            PlayerInfo player = { i, loaded, { name, player_data->principal_id }, player_data };
 
             if (exclude_duplicates && utilities::is_duplicate(list, player))
             {
@@ -246,5 +248,10 @@ namespace base
         }
 
         return list;
+    }
+
+    bool utilities::is_connected(u8 player_id)
+    {
+        return !g_pointers->is_disconnected((*g_pointers->m_network_engine)->station_buffer_mgr, player_id);
     }
 }

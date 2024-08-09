@@ -11,7 +11,7 @@ namespace base
     {
         if ((*g_pointers->m_network_engine)->local_player_id != UINT32_MAX && utilities::get_player_amount(true) != 0)
         {
-            auto list = utilities::get_player_list(true, true);
+            auto list = utilities::get_player_list(true, true, true);
 
             if (list.empty())
                 utilities::print_error("Could not fetch the player list\n\nOperation: Reading the target", true);
