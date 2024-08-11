@@ -23,7 +23,7 @@ namespace base
 
             session += std::format("\n\nDate Time: {}\nSession ID: {:d}", g_logger.get_current_date_time_string(true), network_engine->session_net_z->room_id);
             
-            session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), network_engine->local_player_id);
+            session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), (network_engine->local_player_id + 1));
 
             auto list = utilities::get_player_list();
 
@@ -32,7 +32,7 @@ namespace base
 
             for (auto player : list)
             {
-                auto slot = (player.id == 0 ? "0 (Host)" : std::to_string(player.id));
+                auto slot = (player.id == 0 ? "1 (Host)" : std::to_string(player.id + 1));
 
                 if (player.loaded)
                 {

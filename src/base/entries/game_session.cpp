@@ -24,9 +24,19 @@ namespace base
             std::string keyboard_message = "";
 
             keyboard_message += Color::Turquoise << "Select a player\n\n";
-            keyboard_message += utilities::format_output("Session ID", Utils::Format("%d", (*g_pointers->m_network_engine)->session_net_z->room_id), true);
-            keyboard_message += utilities::format_output("Player Amount", Utils::Format("%d", utilities::get_player_amount(false)), true);
-            keyboard_message += utilities::format_output("Room Host", list[0].info.name, true);
+            keyboard_message += utilities::format_output("Session ID", std::format("{:d}", (*g_pointers->m_network_engine)->session_net_z->room_id), false);
+            keyboard_message += utilities::format_output("Player Amount", std::format("{:d}", utilities::get_player_amount(false)), true);
+            keyboard_message += utilities::format_output("Room Host", list.at(0).info.name, true);
+			
+			auto player_id = (*g_pointers->m_network_engine)->local_player_id;
+            auto client_data = utilities::get_network_player_data(player_id);
+            auto principal_id = utilities::get_my_principal_id();
+
+            keyboard_message += Color::Cyan << "\n\n— Your Details —";
+            keyboard_message += utilities::format_output("Player", std::format("{} (Slot {:d})", utilities::parse_name(client_data), (player_id + 1)), true);
+            keyboard_message += utilities::format_output("Principal ID (DEC)", std::format("{:d}", principal_id), true);
+            keyboard_message += utilities::format_output("Principal ID (HEX)", std::format("0x{:X}", principal_id), true);
+            keyboard_message += utilities::format_output("Friend Code", utilities::format_friendcode(utilities::pid_to_fc(principal_id)), true);
 
             Keyboard keyboard(keyboard_message, items);
             keyboard.CanAbort(true);
