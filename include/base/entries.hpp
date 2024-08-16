@@ -9,8 +9,10 @@ namespace base
 	{
 		static void game_session(CTRPluginFramework::MenuEntry *);
 		static void opponent_list(CTRPluginFramework::MenuEntry *);
-		static void render_optimizations(CTRPluginFramework::MenuEntry *);
-		static void show_mii_heads(CTRPluginFramework::MenuEntry *);
 		static void session_logger(CTRPluginFramework::MenuEntry *);
+		static void render_optimizations(CTRPluginFramework::MenuEntry *);
+		static void load_rankboard(CTRPluginFramework::MenuEntry *);
+		static void show_mii_heads(CTRPluginFramework::MenuEntry *);
+		static void pid_display_settings(CTRPluginFramework::MenuEntry *);
 	};
 }

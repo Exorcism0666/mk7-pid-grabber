@@ -1,5 +1,7 @@
 #pragma once
 
+#include <base/types.hpp>
+
 namespace base
 {
 	class settings
@@ -14,8 +16,22 @@ namespace base
 
 		struct options
 		{
-			bool render_optimizations{ false };
 			bool session_logger{ false };
+			bool render_optimizations{ false };
+			bool spectator_rankboard{ false };
+			bool show_mii_heads{ false };
+
+			struct pid_display
+			{
+				enum class mode : u8
+				{
+					Decimal,
+					Hexadecimal,
+					Both
+				}
+				mode{ mode::Both };
+			}
+			pid_display;
 		}
 		m_options{};
 

@@ -3,8 +3,8 @@
 #include <base/types.hpp>
 
 using GetNetworkPlayerData_t = Net::NetworkPlayerData * (*)(Net::NetworkPlayerDataManager *, u8);
-using StationSelectionIteratorTemplate_t = void (*)(u32 **);
-using IteratorOverDOsAdvanceToValidItem_t = void (*)(u32 **, bool);
+using StationSelectionIteratorTemplate_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *);
+using IteratorOverDOsAdvanceToValidItem_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *, bool);
 using InitRankboard_t = void (*)(u32);
 using IsDisconnected_t = bool (*)(Net::StationBufferManager *, u8);
 

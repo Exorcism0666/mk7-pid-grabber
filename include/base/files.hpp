@@ -15,6 +15,7 @@ namespace base
 		friend class menu;
 		friend class logger;
 		friend class settings;
+		friend struct entries;
 		friend struct features;
 		
 		CTRPluginFramework::File m_logger;

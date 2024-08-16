@@ -5,9 +5,13 @@
 #include <types.h>
 #include <3ds.h>
 
+#include <magic_enum/magic_enum.hpp>
+
 #include <string>
 #include <vector>
 #include <format>
+#include <map>
+#include <set>
 
 #define DEFAULT_NAME "Player"
 #define GUEST_NAME "no name"
@@ -45,6 +49,53 @@ namespace nn::nex
         u32 station_url;
     };
     static_assert(sizeof(Station) == 0x90);
+
+    // ###################################
+    // # Thanks to Anto726's RE and help #
+    // ###################################
+
+    struct Selection
+    {
+        u8 gap0[0x21];
+    };
+    static_assert(sizeof(Selection) == 0x21);
+
+    struct DOSelections
+    {
+        void *vmt;
+        Selection selections[3];
+    };
+    static_assert(sizeof(DOSelections) == 0x68);
+
+    struct DOFilter
+    {
+        u8 gap0[4];
+        u16 count;
+    };
+    static_assert(sizeof(DOFilter) == 6);
+
+    struct DORef
+    {
+        void *vmt;
+        Station *station;
+        void *do_handle;
+        bool is_hard;
+        DOFilter *filter;
+        u8 gap0[0xD];
+    };
+    static_assert(sizeof(DORef) == 0x24);
+
+    struct IteratorOverDOs
+    {
+        void *vmt;
+        DOSelections *do_selections;
+        DORef do_ref;
+    };
+    static_assert(sizeof(IteratorOverDOs) == 0x2C);
+
+    struct SelectionIteratorTemplate_Station : IteratorOverDOs
+    {
+    };
 }
 
 namespace Net
@@ -99,13 +150,6 @@ namespace Net
     };
     static_assert(sizeof(NetworkEngine) == 0x2BC);
 }
-
-struct SelectionIteratorTemplate
-{
-    u32 *iterator[3];
-    u32 station;
-    u32 available;
-};
 
 struct OpponentList
 {
