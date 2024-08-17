@@ -101,9 +101,6 @@ namespace base
 
     void menu::finalize()
     {
-        if (g_settings.m_options.session_logger)
-            m_session_logger_entry->Enable();
-        
         if (g_settings.m_options.render_optimizations)
             m_render_optimizations_entry->Enable();
         

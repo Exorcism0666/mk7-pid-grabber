@@ -1,11 +1,10 @@
 #include <base/features.hpp>
 
 #include <base/pointers.hpp>
+#include <base/settings.hpp>
+#include <base/notifier.hpp>
 #include <base/logger.hpp>
 #include <base/files.hpp>
-#include <base/menu.hpp>
-
-#include <base/notifier.hpp>
 
 using namespace CTRPluginFramework;
 
@@ -13,7 +12,7 @@ namespace base
 {
     void features::dump_session()
     {
-        if (g_menu->m_session_logger_entry->IsActivated())
+        if (g_settings.m_options.session_logger)
         {
             auto const network_engine = (*g_pointers->m_network_engine);
 
