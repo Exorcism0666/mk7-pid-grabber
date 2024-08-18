@@ -335,11 +335,11 @@ namespace glz::detail
       repeat_in_1_18(expr_stop)
 #undef expr_stop
          /* read more digits in integral part */
-         digi_intg_more : static constexpr uint64_t U64_MAX = (std::numeric_limits<uint64_t>::max)(); // todo
+         digi_intg_more :
       if ((num_tmp = *cur - zero) < 10) {
          if (!digi_is_digit_or_fp(cur[1])) {
             /* this number is an integer consisting of 20 digits */
-            if ((sig < (U64_MAX / 10)) || (sig == (U64_MAX / 10) && num_tmp <= (U64_MAX % 10))) {
+            if ((sig < ((std::numeric_limits<uint64_t>::max)() / 10)) || (sig == ((std::numeric_limits<uint64_t>::max)() / 10) && num_tmp <= ((std::numeric_limits<uint64_t>::max)() % 10))) {
                sig = num_tmp + sig * 10;
                cur++;
                val = static_cast<X>(sig);

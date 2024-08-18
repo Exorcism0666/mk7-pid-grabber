@@ -38,7 +38,7 @@ namespace glz::detail
    GLZ_ALWAYS_INLINE void maybe_pad(B& b, auto& ix) noexcept
    {
       if constexpr (vector_like<B>) {
-         if (const auto k = ix + N; k > b.size()) [[unlikely]] {
+         if (const size_t k = ix + N; k > b.size()) [[unlikely]] {
             b.resize((std::max)(b.size() * 2, k));
          }
       }
@@ -48,7 +48,7 @@ namespace glz::detail
    GLZ_ALWAYS_INLINE void maybe_pad(const size_t n, B& b, auto& ix) noexcept
    {
       if constexpr (vector_like<B>) {
-         if (const auto k = ix + n; k > b.size()) [[unlikely]] {
+         if (const size_t k = ix + n; k > b.size()) [[unlikely]] {
             b.resize((std::max)(b.size() * 2, k));
          }
       }
