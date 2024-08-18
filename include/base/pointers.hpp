@@ -8,8 +8,6 @@ using IteratorOverDOsAdvanceToValidItem_t = void (*)(nn::nex::SelectionIteratorT
 using InitRankboard_t = void (*)(u32);
 using IsDisconnected_t = bool (*)(Net::StationBufferManager *, u8);
 
-#define CTRPF_3D_Slider_Settings 0x1FF81000
-
 namespace base
 {
 	class pointers

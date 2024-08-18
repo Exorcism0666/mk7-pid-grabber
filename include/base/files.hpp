@@ -11,6 +11,8 @@ namespace base
 		~files();
 
 		static void set_working_directory();
+		
+		inline CTRPluginFramework::File get_error_log() { return m_error; };
 	private:
 		friend class menu;
 		friend class logger;
@@ -20,7 +22,8 @@ namespace base
 		
 		CTRPluginFramework::File m_logger;
 		CTRPluginFramework::File m_settings;
-		CTRPluginFramework::File m_session_log;
+		CTRPluginFramework::File m_session;
+		CTRPluginFramework::File m_error;
 	};
 
 	inline files *g_files{};

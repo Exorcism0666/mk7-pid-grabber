@@ -16,7 +16,13 @@ namespace base
 
 		struct options
 		{
-			bool session_logger{ false };
+			struct session_logger
+			{
+				bool enabled{ true };
+				bool notify{ true };
+			}
+			session_logger;
+
 			bool render_optimizations{ false };
 			bool spectator_rankboard{ false };
 			bool show_mii_heads{ false };
