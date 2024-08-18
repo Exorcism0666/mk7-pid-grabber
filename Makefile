@@ -48,7 +48,8 @@ SOURCES 	:= 	src \
 ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
 DEFINES 	:=	-D__3DS__ -DNNSDK -DGITHUB="\"$(GITHUB)\"" -DCREATOR="\"$(CREATOR)\"" -DNAME="\"$(NAME)\"" \
-				-DABOUT="\"$(ABOUT)\"" -DMAJOR="\"$(MAJOR)\"" -DMINOR="\"$(MINOR)\"" -DREV="\"$(REV)\"" -DDATE="\"$(DATE)\""
+				-DABOUT="\"$(ABOUT)\"" -DMAJOR="\"$(MAJOR)\"" -DMINOR="\"$(MINOR)\"" -DREV="\"$(REV)\"" -DDATE="\"$(DATE)\"" \
+				#_DEBUG
 
 CFLAGS		:= $(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-psabi
 CFLAGS		+= $(INCLUDE) $(DEFINES)
