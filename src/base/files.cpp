@@ -8,7 +8,14 @@ namespace base
 
 	files::files()
 	{
-        if (File::Open(m_session_log, "mk7_session.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+#ifdef _DEBUG   
+        if (File::Open(m_logger, "debug.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+            abort();
+#endif
+        if (File::Open(m_error, "error.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+            abort();
+
+        if (File::Open(m_session, "mk7_session.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
             abort();
         
         if (File::Open(m_settings, "settings.json", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
@@ -22,7 +29,8 @@ namespace base
         g_files = nullptr;
 
         m_settings.Close();
-        m_session_log.Close();
+        m_session.Close();
+        m_error.Close();
 
 #ifdef _DEBUG
         m_logger.Close();

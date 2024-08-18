@@ -6,7 +6,6 @@
 #include <base/pointers.hpp>
 #include <base/hooking.hpp>
 #include <base/patches.hpp>
-
 #include <base/services/rainbow_service.hpp>
 
 namespace CTRPluginFramework
@@ -32,7 +31,11 @@ namespace CTRPluginFramework
         g_hooking->enable();
 
         Sleep(Seconds(5));
-        
+
+#ifdef _DEBUG
+        OSD::Notify(Color::SkyBlue << "Dev Build");
+#endif
+
         g_menu->run();
 
         g_hooking->disable();

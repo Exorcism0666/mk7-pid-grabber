@@ -5,10 +5,21 @@
 #include <base/settings.hpp>
 #include <base/patches.hpp>
 #include <base/files.hpp>
+#include <base/logger.hpp>
 
 #include <base/services/rainbow_service.hpp>
 
+#include "error_handler.cpp"
+
+using namespace CTRPluginFramework;
+
 #define DEFAULT_ENTRY [](MenuEntry *) {}
+
+#ifdef _DEBUG
+    #define MENU_TYPE 0
+#else
+    #define MENU_TYPE 1
+#endif
 
 #define GAME_SESSION_NOTE Color::SkyBlue << "This fetches the current players inside an active game session or current lobby.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define OPPONENT_LIST_NOTE Color::SkyBlue << "This fetches only the opponent list from your save data, excluding the friend list.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
@@ -20,11 +31,9 @@
 
 namespace base
 {
-    using namespace CTRPluginFramework;
-    
     menu::menu()
     :
-        m_plugin_menu(new PluginMenu(NAME, std::stoi(MAJOR), std::stoi(MINOR), std::stoi(REV), ABOUT, true)),
+        m_plugin_menu(new PluginMenu(NAME, std::stoi(MAJOR), std::stoi(MINOR), std::stoi(REV), ABOUT, MENU_TYPE)),
 
         m_game_session_entry(new MenuEntry("Game Session", nullptr, entries::game_session, GAME_SESSION_NOTE)),
         m_opponent_list_entry(new MenuEntry("Opponent List", nullptr, entries::opponent_list, OPPONENT_LIST_NOTE)),
@@ -36,12 +45,15 @@ namespace base
     {
         m_plugin_menu->SynchronizeWithFrame(true);
         m_plugin_menu->ShowWelcomeMessage(false);
+        
+#ifndef _DEBUG
         m_plugin_menu->SetHexEditorState(false);
 
         auto settings = FwkSettings::Get();
 
         settings.AllowActionReplay = false;
 		settings.AllowSearchEngine = false;
+#endif
 
         m_plugin_menu->OnNewFrame = [](Time)
         {
@@ -66,6 +78,8 @@ namespace base
         finalize();
 
         station_list.clear();
+
+        Process::exceptionCallback = error_handler;
 
         g_menu = this;
     }

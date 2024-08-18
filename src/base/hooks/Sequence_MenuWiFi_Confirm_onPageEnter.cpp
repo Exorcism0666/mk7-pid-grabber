@@ -3,8 +3,6 @@
 #include <base/features.hpp>
 #include <base/menu.hpp>
 
-#include <base/logger.hpp>
-
 namespace base
 {
     void hooks::Sequence_MenuWiFi_Confirm_onPageEnter(u32 _this)
@@ -12,11 +10,7 @@ namespace base
         g_menu->station_list = utilities::get_station_list();
 
         if (!g_menu->station_list.size())
-        {
-            g_logger.info("Error: Empty Station list (Station List Update)");
-
-            utilities::print_error("Could not fetch the Station list", true);
-        }
+            utilities::print_error(std::format("Error: Empty Station list (Station List Update)"), true);
         
         features::clean_principal_id();
 

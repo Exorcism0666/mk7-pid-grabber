@@ -89,7 +89,7 @@ namespace base
 		});
 
 		batch.run(memory::ranges::c_text);
-
+		
 		g_pointers = this;
 	}
 

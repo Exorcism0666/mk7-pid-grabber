@@ -24,17 +24,13 @@ namespace base
         return std::string(buf);
     }
 
-    void logger::log(std::string str)
+    void logger::log(std::string str, CTRPluginFramework::File file, bool use_date)
     {
         CTRPluginFramework::Lock _(m_mutex);
 
-        g_files->m_logger.WriteLine("[" + logger::get_current_date_time_string(true) + "] " + str);
-    }
+        if (use_date)
+            str = "[" + logger::get_current_date_time_string(true) + "] " + str;
 
-    void logger::dump(std::string str)
-    {
-        CTRPluginFramework::Lock _(m_mutex);
-
-        g_files->m_session_log.WriteLine(str);
+        file.WriteLine(str);
     }
 }

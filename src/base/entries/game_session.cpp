@@ -15,7 +15,7 @@ namespace base
             auto list = utilities::get_player_list();
 
             if (list.empty())
-                utilities::print_error("Could not fetch the player list\n\nOperation: Reading the target", true);
+                utilities::print_error(std::format("Error: Empty Player List (Game Session)"), true);
             
             std::vector<std::string> items;
 
@@ -67,16 +67,17 @@ namespace base
 
                 if (player.loaded)
                 {
-                    std::string message_box = "";
+                    u32 station_id = utilities::get_station_id(player.id, true);
+
+                    if (!station_id)
+                        utilities::print_error(std::format("Error: Fetching Station ID (Game Session) | Station ID: {:X} | Player ID: {:d} | Name: {}", station_id, player.id, player.info.name), true);
 
                     u32 clean_pid{};
-
-                    u32 station_id = utilities::get_station_id(player.id, true);
 
                     if (auto station = utilities::get_station_from_list(station_id))
                     {
                         if (station->station_id != station_id)
-                            utilities::print_error("Could not match the Station ID\n\nOperation: Reading the target", true);
+                            utilities::print_error(std::format("Error: Matching Station ID (Game Session) | Station ID: {:X} | Station ID From List: {:X} | Player ID: {:d} | Name: {}", station_id, station->station_id, player.id, player.info.name), true);
 
                         clean_pid = utilities::get_principal_id(station);
                     }
@@ -85,6 +86,8 @@ namespace base
 
                     if (clean_pid)
                     {
+                        std::string message_box = "";
+
                         u32 principal_id = player.info.principal_id;
 
                         if (clean_pid != principal_id)
@@ -129,7 +132,7 @@ namespace base
                         utilities::pop_up(Color::DodgerBlue << player.info.name, message_box, true);
                     }
                     else
-                        utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Reading the target", true);
+                        utilities::print_error(std::format("Error: Retrieving Principal ID (Game Session) | Station ID: {:X} | Player ID: {:d} | Name: {}", station_id, player.id, player.info.name), true);
                 }
                 else
                     utilities::print_error(Color::DodgerBlue << player.info.name << Color::White << " is unavailable", false);
