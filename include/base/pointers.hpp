@@ -5,6 +5,7 @@
 using GetNetworkPlayerData_t = Net::NetworkPlayerData * (*)(Net::NetworkPlayerDataManager *, u8);
 using StationSelectionIteratorTemplate_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *);
 using IteratorOverDOsAdvanceToValidItem_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *, bool);
+using IteratorOverDOsDestructor_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *);
 using InitRankboard_t = void (*)(u32);
 using IsDisconnected_t = bool (*)(Net::StationBufferManager *, u8);
 
@@ -19,6 +20,7 @@ namespace base
 		GetNetworkPlayerData_t get_network_player_data;
         StationSelectionIteratorTemplate_t station_selection_iterator_template;
         IteratorOverDOsAdvanceToValidItem_t iterator_over_DOs_advance_to_valid_item;
+		IteratorOverDOsDestructor_t iterator_over_DOs_destructor;
 		InitRankboard_t init_rankBoard;
 		IsDisconnected_t is_disconnected;
 
