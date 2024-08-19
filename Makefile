@@ -9,12 +9,19 @@ include $(DEVKITARM)/3ds_rules
 
 CTRPFLIB	?=	$(DEVKITPRO)/libctrpf
 
+#DEBUG_BUILD	:=	true
+
 DATE		:=	$(shell date '+%Y-%m-%d %H:%M:%S')
 
 GITHUB		:=	https://github.com/H4x0rSpooky/mk7-pid-grabber
 CREATOR		:=	H4x0rSpooky
 
 NAME		:=	mk7-pid-grabber
+
+ifeq ($(DEBUG_BUILD),true)
+NAME		:=	$(NAME)_dev
+endif
+
 ABOUT		:=	$(NAME) is a Principal ID grabbing tool for Mario Kart 7 created by $(CREATOR).\n\nGithub Repository: $(GITHUB)\n\nUpdate: $(DATE)
 
 MAJOR		:=	1
@@ -26,6 +33,7 @@ PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
 DEBUG		:=	debug
+ASSETS		:= 	assets
 
 INCLUDES	:= 	include \
 				include/ctrpf \
@@ -48,8 +56,11 @@ SOURCES 	:= 	src \
 ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
 DEFINES 	:=	-D__3DS__ -DNNSDK -DGITHUB="\"$(GITHUB)\"" -DCREATOR="\"$(CREATOR)\"" -DNAME="\"$(NAME)\"" \
-				-DABOUT="\"$(ABOUT)\"" -DMAJOR="\"$(MAJOR)\"" -DMINOR="\"$(MINOR)\"" -DREV="\"$(REV)\"" -DDATE="\"$(DATE)\"" \
-				#_DEBUG
+				-DABOUT="\"$(ABOUT)\"" -DMAJOR="\"$(MAJOR)\"" -DMINOR="\"$(MINOR)\"" -DREV="\"$(REV)\"" -DDATE="\"$(DATE)\""
+
+ifeq ($(DEBUG_BUILD),true)
+DEFINES		:= $(DEFINES) -D_DEBUG
+endif
 
 CFLAGS		:= $(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-psabi
 CFLAGS		+= $(INCLUDE) $(DEFINES)
@@ -57,7 +68,11 @@ CFLAGS		+= $(INCLUDE) $(DEFINES)
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++23
 
 ASFLAGS		:= $(ARCH)
-LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
+LDFLAGS		:= -T $(TOPDIR)/$(ASSETS)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded
+
+ifneq ($(DEBUG_BUILD),true)
+LDFLAGS		:= $(LDFLAGS) --strip-debug
+endif
 
 LIBS		:= -lctrpf -lctru
 LIBDIRS		:= $(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
@@ -94,14 +109,17 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 all: $(BUILD)
 
 $(BUILD):
-	@[ -d $(DEBUG) ] || mkdir -p $(DEBUG)
+	@rm -fr $(DEBUG) *.3gx *.elf
+ifeq ($(DEBUG_BUILD),true)
+		@[ -d $(DEBUG) ] || mkdir -p $(DEBUG)
+endif
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 clean:
-	@echo clean ... 
-	@rm -fr $(DEBUG) $(BUILD) $(OUTPUT).3gx $(OUTPUT).elf
+	@echo clean ...
+	@rm -fr $(DEBUG) $(BUILD) *.3gx *.elf
 
 re: clean all
 
@@ -125,13 +143,20 @@ $(OUTPUT).3gx : $(OFILES)
 	@$(bin2o)
 
 #---------------------------------------------------------------------------------
-#.PRECIOUS: %.elf
+ifeq ($(DEBUG_BUILD),true)
+.PRECIOUS: %.elf
+endif
+
 %.3gx: %.elf
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
-	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
+ifeq ($(DEBUG_BUILD),true)
+	@3gxtool -s $(word 1, $^) $(TOPDIR)/$(ASSETS)/$(PLGINFO) $@
 	@-mv $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
 	@-mv $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
+else
+	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(ASSETS)/$(PLGINFO) $@
+endif
 	@echo $(NAME).3gx successfully created!
 
 -include $(DEPENDS)
