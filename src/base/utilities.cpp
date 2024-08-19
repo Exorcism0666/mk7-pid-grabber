@@ -115,6 +115,8 @@ namespace base
 
     nn::nex::Station * utilities::get_station(u32 station_id)
     {
+        nn::nex::Station *station{};
+
         nn::nex::SelectionIteratorTemplate_Station iterator{};
 
         g_pointers->station_selection_iterator_template(&iterator);
@@ -122,12 +124,18 @@ namespace base
         while (iterator.do_ref.do_handle)
         {
             if ((iterator.do_ref.station->station_id & 0x3FFFFF) == station_id)
-                return iterator.do_ref.station;
+            {
+                station = iterator.do_ref.station;
+
+                break;
+            }
             
             g_pointers->iterator_over_DOs_advance_to_valid_item(&iterator, false);
         }
 
-        return {};
+        g_pointers->iterator_over_DOs_destructor(&iterator);
+
+        return station;
     }
 
     std::vector<nn::nex::Station *> utilities::get_station_list()
@@ -144,6 +152,8 @@ namespace base
             
             g_pointers->iterator_over_DOs_advance_to_valid_item(&iterator, false);
         }
+
+        g_pointers->iterator_over_DOs_destructor(&iterator);
 
         return list;
     }

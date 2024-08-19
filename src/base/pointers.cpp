@@ -22,6 +22,11 @@ namespace base
 		{
 			iterator_over_DOs_advance_to_valid_item = reinterpret_cast<decltype(iterator_over_DOs_advance_to_valid_item)>(handle.as<void *>());
         });
+
+		batch.add("nn::nex::IteratorOverDOs::~IteratorOverDOs", "38 40 2D E9 00 40 A0 E1 30 00 9F E5 00 10 A0 E3", [this](memory::handle handle)
+		{
+            iterator_over_DOs_destructor = reinterpret_cast<decltype(iterator_over_DOs_destructor)>(handle.as<void *>());
+        });
 		
 		batch.add("Net::NetworkEngine", "B4 29 00 00 D4 27 00 00 78 78 00 00 F8 05 00 00", [this](memory::handle handle)
 		{

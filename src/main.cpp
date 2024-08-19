@@ -59,6 +59,15 @@ namespace CTRPluginFramework
 
     void PatchProcess(FwkSettings &settings)
     {
+#ifndef _DEBUG
+        if (R_SUCCEEDED(plgLdrInit()))
+		{
+            PLGLDR__SetRosalinaMenuBlock(true);
+
+            plgLdrExit();
+		}
+#endif
+
         settings.ThreadPriority = 0x3E;
         settings.WaitTimeToBoot = Time::Zero;
 
