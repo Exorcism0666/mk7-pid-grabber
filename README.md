@@ -35,12 +35,10 @@ After that, download the source code and follow the steps to install [CTRPluginF
 Once all the steps are completed, run the `build.bat` file inside the source and let it compile the file. After that, you can simply use it like described above this section.
 
 # Reporting bugs or issues
-Just direct message me on Discord.
-
-**My username:** `h4x0rspooky`
+Join the [Discord](https://discord.com/invite/QGUNRK9Xw7) server.
 
 > [!WARNING]
-> If you're not being civil about your report, I'll either ignore it or match your immaturity's energy. It sadly already happened, which lead to a person creating a fork with misleading information, so be aware of that.
+> If you're not being civil about your report, it'll either get ignored or you'll get punished. It sadly already happened, which lead to a person creating a fork with misleading information, so be aware of that.
 
 # Credits
 - H4x0rSpooky for creating this project
