@@ -68,10 +68,10 @@ CFLAGS		+= $(INCLUDE) $(DEFINES)
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++23
 
 ASFLAGS		:= $(ARCH)
-LDFLAGS		:= -T $(TOPDIR)/$(ASSETS)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded
+LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded
 
 ifneq ($(DEBUG_BUILD),true)
-LDFLAGS		:= $(LDFLAGS) --strip-debug
+LDFLAGS		:= $(LDFLAGS),--strip-debug
 endif
 
 LIBS		:= -lctrpf -lctru
@@ -151,11 +151,11 @@ endif
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
 ifeq ($(DEBUG_BUILD),true)
-	@3gxtool -s $(word 1, $^) $(TOPDIR)/$(ASSETS)/$(PLGINFO) $@
+	@3gxtool -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
 	@-mv $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
 	@-mv $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
 else
-	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(ASSETS)/$(PLGINFO) $@
+	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
 endif
 	@echo $(NAME).3gx successfully created!
 
