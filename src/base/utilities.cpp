@@ -31,20 +31,18 @@ namespace base
         return std::string(buffer.data());
     }
     
-    void utilities::print_error(std::string error, bool report)
+    void utilities::print_error(std::string error, bool abort)
     {
-        if (report)
+        if (abort)
         {
             g_logger.error("{}", error);
-
-            error = Color::Red << "Please send your " << g_files->get_error_log().GetName() << " to " << CREATOR << "\n\n";
 
             error += Color::SkyBlue << "File Location:\n\n" << Color::DodgerBlue << std::format("sd:\\luma\\plugins\\{:016X}\\", Process::GetTitleID()) << "\n" << NAME << "\\" << g_files->get_error_log().GetName();
         }
 
         MessageBox(Color::Orange << "An error occurred", error, DialogType::DialogOk, ClearScreen::Both)();
 
-        if (report)
+        if (abort)
         {
             Sleep(Seconds(1));
 

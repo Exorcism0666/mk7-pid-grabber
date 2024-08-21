@@ -79,7 +79,9 @@ namespace base
 
         station_list.clear();
 
+#ifndef _DEBUG
         Process::exceptionCallback = error_handler;
+#endif
 
         g_menu = this;
     }

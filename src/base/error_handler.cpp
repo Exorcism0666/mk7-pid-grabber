@@ -50,8 +50,7 @@ namespace CTRPluginFramework
         top.DrawSysfont("File Location:", 8, 80, Color::SkyBlue);
         top.DrawSysfont(std::format("sd:\\luma\\plugins\\{:016X}\\", Process::GetTitleID()), 8, 100, Color::DodgerBlue);
         top.DrawSysfont(std::format("{}\\{}", NAME, g_files->get_error_log().GetName()), 8, 120, Color::DodgerBlue);
-        top.DrawSysfont(std::format("Please send it to {}" , CREATOR), 8, 140, Color::Silver);
-        top.DrawSysfont("Press any button to return to the \uE073 HOME-Menu", 8, 180, Color::Turquoise);
+        top.DrawSysfont("Press any button to return to the \uE073 HOME-Menu", 8, 170, Color::Turquoise);
 
         btm.DrawRect(0, 0, 320, 240, Color());
 
