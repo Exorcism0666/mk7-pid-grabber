@@ -23,7 +23,7 @@ Once that's done, place the `mk7-pid-grabber.3gx` file into the same folder.
 
 While you're in the HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps again.
 
-The default menu activator for the menu is `Select`.
+The button activator for the menu is `Select`.
 
 # How to build the project
 Make sure you have the latest version of:
