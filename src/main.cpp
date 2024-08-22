@@ -71,7 +71,7 @@ namespace CTRPluginFramework
         settings.ThreadPriority = 0x3E;
         settings.WaitTimeToBoot = Time::Zero;
 
-        settings.CachedDrawMode = true;
+        settings.CachedDrawMode = false;
         settings.TryLoadSDSounds = false;
         settings.UseGameHidMemory = true;
 
