@@ -17,28 +17,25 @@ Use the the following `Title ID` depending on your version:
 - **JPN**: `0004000000030600`
 
 > [!NOTE]
-> There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or [3dsdb](https://3dsdb.com/).
+> There are more versions however those are untested. If yours isn't included, find it through `FBI` under titles or [3dsdb](https://3dsdb.com/).
 
 Once that's done, place the `mk7-pid-grabber.3gx` file into the same folder.
 
-While you're in the HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, simply close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps again.
+While you're in the HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps again.
 
-The default menu activator for `CTRPF` is `Select`, this is the creators' choice.
+The default menu activator for the menu is `Select`.
 
 # How to build the project
 Make sure you have the latest version of:
 - [git](https://git-scm.com/downloads)
 - [devkitPro](https://devkitpro.org/wiki/Getting_Started)
 
-After that, download the source code and follow the steps to install [CTRPluginFramework](https://gitlab.com/thepixellizeross/ctrpluginframework). Don't forget to also run `pacman -S 3gxtool` in order to install [3gxtool](https://gitlab.com/thepixellizeross/3gxtool) which is required to compile `3gx` files.
+After that, download the source code and follow the steps to install [CTRPluginFramework](https://gitlab.com/thepixellizeross/ctrpluginframework). Don't forget to also run `pacman -S 3gxtool` in order to install [3gxtool](https://gitlab.com/thepixellizeross/3gxtool) which is required to compile `.3gx` files.
 
 Once all the steps are completed, run the `build.bat` file inside the source and let it compile the file. After that, you can simply use it like described above this section.
 
-# Reporting bugs or issues
+# Reporting issues or suggesting features
 Join the [Discord](https://discord.com/invite/QGUNRK9Xw7) server.
-
-> [!WARNING]
-> If you're not being civil about your report, it'll either get ignored or you'll get punished. It sadly already happened, which lead to a person creating a fork with misleading information, so be aware of that.
 
 # Credits
 - H4x0rSpooky for creating this project
