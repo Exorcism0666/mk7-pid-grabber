@@ -29,7 +29,6 @@ The button activator for the menu is `Select`.
 | Required Downloads/Installs |
 |:---------------------------|
 | [git](https://git-scm.com/downloads) |
-|:---------------------------|
 | [devkitPro](https://devkitpro.org/wiki/Getting_Started) |
 
 After that, download the source code and follow the steps to install [CTRPluginFramework](https://gitlab.com/thepixellizeross/ctrpluginframework). Don't forget to also run `pacman -S 3gxtool` in order to install [3gxtool](https://gitlab.com/thepixellizeross/3gxtool) which is required to compile `.3gx` files.
