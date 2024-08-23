@@ -5,7 +5,7 @@
 
 namespace base
 {
-    void features::spectator_rankboard(u32 race_page)
+    void features::spectator_rankboard(void *race_page)
     {
         if (g_menu->m_spectator_rankboard_entry->IsActivated())
             g_pointers->init_rankBoard(race_page);

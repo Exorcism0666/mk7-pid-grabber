@@ -14,7 +14,7 @@ namespace base
         keyboard.DisplayTopScreen = true;
         keyboard.CanAbort(true);
 
-        keyboard.GetMessage() = Color::SkyBlue << "\n\nFile Location:\n\n" << Color::DodgerBlue << std::format("sd:\\luma\\plugins\\{:016X}\\", Process::GetTitleID()) << "\n" << NAME << "\\" << g_files->m_session.GetName();
+        keyboard.GetMessage() = Color::SkyBlue << "\n\n\n\nFile Location:\n" << Color::DodgerBlue << std::format("sd:/luma/plugins/{:016X}/", Process::GetTitleID()) << "\n" << NAME << "/" << g_files->m_session.GetName();
 
         auto &session_logger = g_settings.m_options.session_logger;
 

@@ -1,6 +1,7 @@
 #include <base/logger.hpp>
 
 #include <base/files.hpp>
+#include "logger.hpp"
 
 namespace base
 {
@@ -29,7 +30,7 @@ namespace base
         CTRPluginFramework::Lock _(m_mutex);
 
         if (use_date)
-            str = "[" + logger::get_current_date_time_string(true) + "] " + str;
+            str = "[" + get_current_date_time_string(true) + "] " + str;
 
         file.WriteLine(str);
     }

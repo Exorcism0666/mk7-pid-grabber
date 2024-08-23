@@ -35,13 +35,13 @@ namespace base
     {
         if (abort)
         {
-            g_logger.error("{}", error);
+            auto file = g_logger.error("{}", error.c_str());
 
-            error += Color::SkyBlue << "File Location:\n\n" << Color::DodgerBlue << std::format("sd:\\luma\\plugins\\{:016X}\\", Process::GetTitleID()) << "\n" << NAME << "\\" << g_files->get_error_log().GetName();
+            error += Color::SkyBlue << "\n\nFile Location:\n" << Color::DodgerBlue << std::format("sd:{}", file.GetFullName());
         }
 
         MessageBox(Color::Orange << "An error occurred", error, DialogType::DialogOk, ClearScreen::Both)();
-
+        
         if (abort)
         {
             Sleep(Seconds(1));

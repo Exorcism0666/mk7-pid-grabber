@@ -28,6 +28,7 @@ using namespace CTRPluginFramework;
 #define MII_HEADS_NOTE Color::SkyBlue << "This entry replaces the character with the Mii heads during the course vote list and on the bottom screen during races."
 #define SESSION_LOGGER_NOTE Color::SkyBlue << "This entry creates a detailed dump of the latest game session you played in.\n\n" << Color::DodgerBlue << "Press \uE000 for more info and options."
 #define PID_SETTINGS_NOTE Color::SkyBlue << "This entry allows changing how the Principal ID gets displayed.\n\n" << Color::DodgerBlue << "Press \uE000 for more info and options."
+#define CPU_MODE_NOTE Color::SkyBlue << "This entry puts you into CPU/AI mode.\n\n" << Color::Orange << "You can't undo it until the next race."
 
 namespace base
 {
@@ -38,6 +39,7 @@ namespace base
         m_game_session_entry(new MenuEntry("Game Session", nullptr, entries::game_session, GAME_SESSION_NOTE)),
         m_opponent_list_entry(new MenuEntry("Opponent List", nullptr, entries::opponent_list, OPPONENT_LIST_NOTE)),
         m_session_logger_entry(new MenuEntry("Session Logger", nullptr, entries::session_logger, SESSION_LOGGER_NOTE)),
+        m_force_cpu_mode_entry(new MenuEntry("Play As CPU/AI", entries::force_cpu_mode, CPU_MODE_NOTE)),
         m_render_optimizations_entry(new MenuEntry("Render Optimizations", entries::render_optimizations, RENDER_OPTIMIZATIONS_NOTE)),
         m_spectator_rankboard_entry(new MenuEntry("Spectator Mode Rankboard", entries::load_rankboard, LIVE_RANKBOARD_NOTE)),
         m_show_mii_heads_entry(new MenuEntry("Mii Heads On Vote/Bottom Screen", entries::show_mii_heads, MII_HEADS_NOTE)),
@@ -104,8 +106,9 @@ namespace base
         *m_plugin_menu += m_opponent_list_entry;
         *m_plugin_menu += m_session_logger_entry;
 
-        m_render_optimizations_entry->UseTopSeparator();
+        m_force_cpu_mode_entry->UseTopSeparator();
 
+        *m_plugin_menu += m_force_cpu_mode_entry;
         *m_plugin_menu += m_render_optimizations_entry;
         *m_plugin_menu += m_spectator_rankboard_entry;
         *m_plugin_menu += m_show_mii_heads_entry;
@@ -117,6 +120,9 @@ namespace base
 
     void menu::finalize()
     {
+        if (g_settings.m_options.force_cpu_mode)
+            m_force_cpu_mode_entry->Enable();
+        
         if (g_settings.m_options.render_optimizations)
             m_render_optimizations_entry->Enable();
         

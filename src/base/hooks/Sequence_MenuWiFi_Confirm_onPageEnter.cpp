@@ -5,7 +5,7 @@
 
 namespace base
 {
-    void hooks::Sequence_MenuWiFi_Confirm_onPageEnter(u32 _this)
+    void hooks::Sequence_MenuWiFi_Confirm_onPageEnter(void *_this)
     {
         g_menu->station_list = utilities::get_station_list();
 

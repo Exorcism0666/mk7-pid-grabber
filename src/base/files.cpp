@@ -12,7 +12,8 @@ namespace base
         if (File::Open(m_logger, "debug.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
             abort();
 #endif
-        if (File::Open(m_error, "error.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+
+        if (Directory::Open(m_error_dir, "errors", true) != Directory::OPResult::SUCCESS)
             abort();
 
         if (File::Open(m_session, "mk7_session.log", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
@@ -30,7 +31,7 @@ namespace base
 
         m_settings.Close();
         m_session.Close();
-        m_error.Close();
+        m_error_dir.Close();
 
 #ifdef _DEBUG
         m_logger.Close();
@@ -38,7 +39,7 @@ namespace base
 	}
 
     void files::set_working_directory()
-    {        
+    {
         auto path = std::string("/luma/plugins");
 
         // Start from the root
@@ -69,5 +70,11 @@ namespace base
             Directory::Create(path);
 
         Directory::ChangeWorkingDirectory(path + "/");
+    }
+
+    void files::create_file(std::string path)
+    {
+        if (File::Create(path) != File::OPResult::SUCCESS)
+            abort();
     }
 }
