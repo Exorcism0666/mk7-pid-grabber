@@ -6,8 +6,10 @@ using GetNetworkPlayerData_t = Net::NetworkPlayerData * (*)(Net::NetworkPlayerDa
 using StationSelectionIteratorTemplate_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *);
 using IteratorOverDOsAdvanceToValidItem_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *, bool);
 using IteratorOverDOsDestructor_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *);
-using InitRankboard_t = void (*)(u32);
+using InitRankboard_t = void (*)(void *);
 using IsDisconnected_t = bool (*)(Net::StationBufferManager *, u8);
+using ChangeToAI_t = void (*)(void *, u8, bool);
+using GetRaceInfo_t = RaceSys::CRaceInfo * (*)(void);
 
 namespace base
 {
@@ -23,6 +25,8 @@ namespace base
 		IteratorOverDOsDestructor_t iterator_over_DOs_destructor;
 		InitRankboard_t init_rankBoard;
 		IsDisconnected_t is_disconnected;
+		ChangeToAI_t change_to_ai;
+		GetRaceInfo_t get_race_info;
 
         Net::NetworkEngine **m_network_engine;
 		void *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
@@ -35,6 +39,7 @@ namespace base
 		void *m_Sequence_BaseRacePage_initMapIcon;
 		void *m_CourseVoteListSetTexture; // unknown symbol
 		void *m_Sequence_MenuWiFi_Confirm_onPageEnter;
+		void *m_Kart_Vehicle_calcMove;
 	};
 
 	inline pointers *g_pointers{};

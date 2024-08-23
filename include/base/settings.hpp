@@ -23,6 +23,7 @@ namespace base
 			}
 			session_logger;
 
+			bool force_cpu_mode{ false };
 			bool render_optimizations{ false };
 			bool spectator_rankboard{ false };
 			bool show_mii_heads{ false };

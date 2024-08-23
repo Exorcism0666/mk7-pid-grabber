@@ -28,6 +28,7 @@ namespace base
         hook_types::detour_hook m_Sequence_RacePage_initControl_WiFiVS_hook;
         hook_types::detour_hook m_Sequence_RacePage_initControl_WiFiBattle_hook;
         hook_types::detour_hook m_Sequence_MenuWiFi_Confirm_onPageEnter_hook;
+        hook_types::detour_hook m_Kart_Vehicle_calcMove_hook;
     };
 
     inline hooking *g_hooking{};

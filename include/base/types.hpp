@@ -50,10 +50,6 @@ namespace nn::nex
     };
     static_assert(sizeof(Station) == 0x90);
 
-    // ###################################
-    // # Thanks to Anto726's RE and help #
-    // ###################################
-
     struct Selection
     {
         u8 gap0[0x21];
@@ -149,6 +145,34 @@ namespace Net
         NetworkPlayerDataManager *network_player_data_mgr;
     };
     static_assert(sizeof(NetworkEngine) == 0x2BC);
+}
+
+namespace RaceSys
+{
+    struct CRaceInfo
+    {
+        u8 gap0[0x184];
+        u16 master_id;
+    };
+    static_assert(sizeof(CRaceInfo) == 0x186);
+}
+
+namespace Kart
+{
+    struct Vehicle
+    {
+        u8 gap0[0x78];
+        void *director;
+        u8 gap1[8];
+        u16 player_id;
+        u8 gap2[0x12];
+        bool is_master;
+        u8 gap3;
+        bool is_ai;
+        u8 gap4[3];
+        bool is_net_recv;
+    };
+    static_assert(sizeof(Vehicle) == 0xA0);
 }
 
 struct OpponentList

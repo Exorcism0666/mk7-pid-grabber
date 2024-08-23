@@ -17,7 +17,7 @@ namespace base
 		void debug(std::format_string<args_t ...>, args_t &&...);
 
 		template <typename ...args_t>
-		void error(std::format_string<args_t ...>, args_t &&...);
+		CTRPluginFramework::File error(std::format_string<args_t ...>, args_t &&...);
 
 		void dump_session(std::string);
 
@@ -25,8 +25,9 @@ namespace base
 
 	private:
 		void log(std::string, CTRPluginFramework::File, bool);
-		
-		CTRPluginFramework::Mutex m_mutex;
+		void create_error(std::string str);
+
+        CTRPluginFramework::Mutex m_mutex;
 	};
 
 	template <typename ...args_t>
@@ -39,10 +40,24 @@ namespace base
     }
 
 	template <typename ...args_t>
-    inline void logger::error(std::format_string<args_t ...> fmt, args_t &&...args)
+    inline CTRPluginFramework::File logger::error(std::format_string<args_t ...> fmt, args_t &&...args)
     {
         auto str = std::format(fmt, std::forward<args_t>(args)...);
-        log(str, g_files->m_error, false);
+
+		std::string path = g_files->m_error_dir.GetName() + "/" + get_current_date_time_string(false) + ".log";
+
+		g_files->create_file(path);
+
+		CTRPluginFramework::File file{};
+
+		if (CTRPluginFramework::File::Open(file, path, CTRPluginFramework::File::WRITE | CTRPluginFramework::File::SYNC) != CTRPluginFramework::File::OPResult::SUCCESS)
+			abort();
+
+		log(str, file, false);
+
+		file.Close();
+
+		return file;
     }
 
 	inline void logger::dump_session(std::string str)
