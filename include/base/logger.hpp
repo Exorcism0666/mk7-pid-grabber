@@ -46,7 +46,7 @@ namespace base
 
 		std::string path = g_files->m_error_dir.GetName() + "/" + get_current_date_time_string(false) + ".log";
 
-		g_files->create_file(path);
+		files::create_file(path);
 
 		CTRPluginFramework::File file{};
 
