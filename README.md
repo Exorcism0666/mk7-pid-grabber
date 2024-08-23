@@ -26,12 +26,12 @@ While you're in the HOME-menu, open the `Rosalina Menu`. The key combination to 
 The button activator for the menu is `Select`.
 
 # How to build the project
-| Required Downloads/Installs |
+| Required Downloads |
 |:---------------------------|
 | [git](https://git-scm.com/downloads) |
 | [devkitPro](https://devkitpro.org/wiki/Getting_Started) |
 
-After that, download the source code and follow the steps to install [CTRPluginFramework](https://gitlab.com/thepixellizeross/ctrpluginframework). Don't forget to also run `pacman -S 3gxtool` in order to install [3gxtool](https://gitlab.com/thepixellizeross/3gxtool) which is required to compile `.3gx` files.
+Download the source code and follow the steps to install [CTRPluginFramework](https://gitlab.com/thepixellizeross/ctrpluginframework). Don't forget to also run `pacman -S 3gxtool` in order to install [3gxtool](https://gitlab.com/thepixellizeross/3gxtool) which is required to compile `.3gx` files.
 
 Once all the steps are completed, run the `build.bat` file inside the source and let it compile the file. After that, you can simply use it like described above this section.
 
