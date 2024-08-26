@@ -8,7 +8,6 @@ using IteratorOverDOsAdvanceToValidItem_t = void (*)(nn::nex::SelectionIteratorT
 using IteratorOverDOsDestructor_t = void (*)(nn::nex::SelectionIteratorTemplate_Station *);
 using InitRankboard_t = void (*)(void *);
 using IsDisconnected_t = bool (*)(Net::StationBufferManager *, u8);
-using ChangeToAI_t = void (*)(void *, u8, bool);
 using GetRaceInfo_t = RaceSys::CRaceInfo * (*)(void);
 
 namespace base
@@ -25,7 +24,6 @@ namespace base
 		IteratorOverDOsDestructor_t iterator_over_DOs_destructor;
 		InitRankboard_t init_rankBoard;
 		IsDisconnected_t is_disconnected;
-		ChangeToAI_t change_to_ai;
 		GetRaceInfo_t get_race_info;
 
         Net::NetworkEngine **m_network_engine;

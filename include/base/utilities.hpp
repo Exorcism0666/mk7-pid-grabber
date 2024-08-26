@@ -2,8 +2,6 @@
 
 #include <base/types.hpp>
 
-#define OPPONENT_LIST 0x659B44
-
 #include <CTRPluginFramework.hpp>
 
 namespace base
@@ -19,11 +17,13 @@ namespace base
         static std::string format_friendcode(u64);
         static u64 pid_to_fc(u32);
         static std::string parse_name(Net::NetworkPlayerData *);
+        static std::string parse_name(System::OpponentData *);
         static Net::NetworkPlayerData * get_network_player_data(u8);
         static u32 get_station_id(u8, bool);
         static nn::nex::Station * get_station(u32);
         static std::vector<nn::nex::Station *> get_station_list();
         static nn::nex::Station * get_station_from_list(u32);
+        static std::vector<OpponentInfo> get_opponent_list();
         static std::vector<PlayerInfo> get_player_list();
         static u32 get_principal_id(nn::nex::Station *);
         static u32 get_principal_id(u8);

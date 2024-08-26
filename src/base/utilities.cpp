@@ -84,11 +84,20 @@ namespace base
         return {};
     }
 
-    std::string utilities::parse_name(Net::NetworkPlayerData *player_data)
+    std::string utilities::parse_name(Net::NetworkPlayerData *network_player)
     {
         std::string name{};
 
-        Process::ReadString((u32)player_data->name, name, (std::size(player_data->name) + 1), StringFormat::Utf16);
+        Process::ReadString((u32)network_player->name, name, (std::size(network_player->name) + 1), StringFormat::Utf16);
+        
+        return ((name.empty() || name == GUEST_NAME) ? DEFAULT_NAME : name);
+    }
+
+    std::string utilities::parse_name(System::OpponentData *opponent)
+    {
+        std::string name{};
+
+        Process::ReadString((u32)opponent->data.name, name, (std::size(opponent->data.name) + 1), StringFormat::Utf16);
         
         return ((name.empty() || name == GUEST_NAME) ? DEFAULT_NAME : name);
     }
@@ -177,13 +186,13 @@ namespace base
             if (utilities::is_local_client(i, false))
                 continue;
 
-            auto player_data = utilities::get_network_player_data(i);
+            auto network_player = utilities::get_network_player_data(i);
             
-            std::string name = utilities::parse_name(player_data);
+            std::string name = utilities::parse_name(network_player);
 
-            bool loaded = (utilities::is_connected(i) && player_data->loaded);
+            bool loaded = (utilities::is_connected(i) && network_player->created);
 
-            PlayerInfo player = { i, loaded, { name, player_data->principal_id }, player_data };
+            PlayerInfo player = { i, loaded, { name, network_player->principal_id }, network_player };
 
             if (utilities::is_duplicate(list, player))
             {
@@ -192,6 +201,23 @@ namespace base
             }
 
             list.push_back(player);
+        }
+
+        return list;
+    }
+
+    std::vector<OpponentInfo> utilities::get_opponent_list()
+    {
+        std::vector<OpponentInfo> list{};
+
+        auto opponent_list = *reinterpret_cast<System::OpponentList **>(0x6673C8);
+        
+        for (size_t i = 0; i < std::size(opponent_list->opponents); i++)
+        {
+            auto opponent = &opponent_list->opponents[i];
+
+            if (opponent->data.loaded)
+                list.push_back({ utilities::parse_name(opponent), opponent->data.principal_id });
         }
 
         return list;

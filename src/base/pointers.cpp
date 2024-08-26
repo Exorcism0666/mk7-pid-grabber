@@ -93,11 +93,6 @@ namespace base
 			is_disconnected = reinterpret_cast<decltype(is_disconnected)>(handle.as<bool *>());
 		});
 
-		batch.add("Kart::Director::changeToAI", "70 40 2D E9 00 40 A0 E1 2C 00 90 E5 01 50 A0 E1 02 10 A0 E1 05 01 90 E7 ? ? ? EB 9C 01 D4 E5", [this](memory::handle handle)
-		{
-			change_to_ai = reinterpret_cast<decltype(change_to_ai)>(handle.as<void *>());
-        });
-
 		batch.add("Kart::Vehicle::calcMove", "F8 4F 2D E9 00 40 A0 E1 01 50 A0 E1 02 60 A0 E1 30 0C 90 E5 01 02 10 E3", [this](memory::handle handle)
 		{
 			m_Kart_Vehicle_calcMove = handle.as<decltype(m_Kart_Vehicle_calcMove)>();

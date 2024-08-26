@@ -3,6 +3,8 @@
 #include <base/pointers.hpp>
 #include <base/menu.hpp>
 
+#include <base/notifier.hpp>
+
 namespace base
 {
     void features::change_to_ai(Kart::Vehicle *_this)
@@ -11,6 +13,6 @@ namespace base
             if (_this->is_master && !_this->is_net_recv && !_this->is_ai)
                 if (auto race_info = g_pointers->get_race_info())
                     if (race_info->master_id == _this->player_id)
-                        g_pointers->change_to_ai(_this->director, _this->player_id, true);
+                        _this->is_goal = true;
     }
 }

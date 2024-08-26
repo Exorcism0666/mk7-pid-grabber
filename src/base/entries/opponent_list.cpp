@@ -8,20 +8,7 @@ namespace base
 {
     void entries::opponent_list(MenuEntry *entry)
     {
-        auto opponent_list = *reinterpret_cast<OpponentList **>(OPPONENT_LIST);
-        
-        if (!opponent_list)
-            return;
-
-        std::vector<OpponentInfo> list;
-
-        for (size_t i = 0; i < std::size(opponent_list->opponents); i++)
-        {
-            auto player_data = &opponent_list->opponents[i];
-
-            if (player_data->check)
-                list.push_back({ utilities::parse_name(player_data), player_data->principal_id });
-        }
+        auto list = utilities::get_opponent_list();
 
         if (!list.empty())
         {

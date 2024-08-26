@@ -23,7 +23,7 @@ namespace nn::nex
         u32 magic;
         u32 unkn0;
         u32 station_id;
-        u32 padded_station_id; // 0x00C0XXXX padded, used as the station's station id
+        u32 padded_station_id;
         u32 unkn1;
     };
     static_assert(sizeof(StationInfo) == 0x14);
@@ -94,6 +94,34 @@ namespace nn::nex
     };
 }
 
+namespace System
+{
+    struct PlayerData
+    {
+        u8 gap0[0x30];
+        u32 principal_id;
+        u8 gap1[0x22];
+        u16 name[0x14];
+        u16 null_terminator;
+        u8 gap2[0x1C];
+        bool loaded;
+    };
+    static_assert(sizeof(PlayerData) == 0xA0);
+
+    struct OpponentData
+    {
+        u8 gap0[8];
+        PlayerData data;
+    };
+    static_assert(sizeof(OpponentData) == 0xA8);
+
+    struct OpponentList
+    {
+        u8 gap0[0x2494];
+        OpponentData opponents[100];
+    };
+}
+
 namespace Net
 {
     struct SessionNetZ
@@ -103,17 +131,10 @@ namespace Net
     };
     static_assert(sizeof(SessionNetZ) == 0x48);
 
-    struct NetworkPlayerData
+    struct NetworkPlayerData : System::PlayerData
     {
-        u8 gap0[0x30];
-        u32 principal_id;
-        u8 gap1[0x22];
-        u16 name[0x14];
-        u16 null_terminator;
-        u8 gap2[0x20];
-        bool check;
-        u8 gap3[3];
-        bool loaded;
+        u32 gap0;
+        bool created;
     };
     static_assert(sizeof(NetworkPlayerData) == 0xA8);
 
@@ -171,15 +192,11 @@ namespace Kart
         bool is_ai;
         u8 gap4[3];
         bool is_net_recv;
+        u8 gap5[7];
+        bool is_goal;
     };
-    static_assert(sizeof(Vehicle) == 0xA0);
+    static_assert(sizeof(Vehicle) == 0xA8);
 }
-
-struct OpponentList
-{
-    u8 gap0[0x9F0];
-    Net::NetworkPlayerData opponents[100];
-};
 
 struct OpponentInfo
 {
