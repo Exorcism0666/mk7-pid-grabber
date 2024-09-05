@@ -29,6 +29,12 @@ namespace base
         hook_types::detour_hook m_Sequence_RacePage_initControl_WiFiBattle_hook;
         hook_types::detour_hook m_Sequence_MenuWiFi_Confirm_onPageEnter_hook;
         hook_types::detour_hook m_Kart_Vehicle_calcMove_hook;
+        hook_types::detour_hook m_Kart_Camera_calcApply_hook;
+        hook_types::detour_hook m_Item_ItemDirector_slot_StartSlot_hook;
+        hook_types::detour_hook m_Effect_KartEffect_calcCameraEffectImpl_hook;
+        hook_types::detour_hook m_Effect_KartEffect_calcEnvEffect_hook;
+        hook_types::detour_hook m_Effect_KartEffect_createGessoTrig_hook;
+        hook_types::detour_hook m_Effect_KartEffect_createWaterOutTrig_hook;
     };
 
     inline hooking *g_hooking{};

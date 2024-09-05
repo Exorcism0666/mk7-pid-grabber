@@ -15,6 +15,7 @@ DATE		:=	$(shell date '+%Y-%m-%d %H:%M:%S')
 
 GITHUB		:=	https://github.com/H4x0rSpooky/mk7-pid-grabber
 CREATOR		:=	H4x0rSpooky
+DISCORD		:=	discord.gg/QGUNRK9Xw7
 
 NAME		:=	mk7-pid-grabber
 
@@ -22,18 +23,17 @@ ifeq ($(DEBUG_BUILD),true)
 NAME		:=	$(NAME)_dev
 endif
 
-ABOUT		:=	$(NAME) is a Principal ID grabbing tool for Mario Kart 7 created by $(CREATOR).\n\nGithub Repository: $(GITHUB)\n\nUpdate: $(DATE)
+ABOUT		:=	$(NAME) is a Principal ID grabbing tool for Mario Kart 7 created by $(CREATOR).\n\nGithub Repository: $(GITHUB)\n\nDiscord Server: $(DISCORD)\n\nUpdate: $(DATE)
 
 MAJOR		:=	1
 MINOR		:= 	0
-REV			:=	0
+REV			:=	1
 
 TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
 DEBUG		:=	debug
-ASSETS		:= 	assets
 
 INCLUDES	:= 	include \
 				include/ctrpf \
@@ -55,7 +55,7 @@ SOURCES 	:= 	src \
 #---------------------------------------------------------------------------------
 ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
-DEFINES 	:=	-D__3DS__ -DNNSDK -DGITHUB="\"$(GITHUB)\"" -DCREATOR="\"$(CREATOR)\"" -DNAME="\"$(NAME)\"" \
+DEFINES 	:=	-D__3DS__ -DNNSDK -DGITHUB="\"$(GITHUB)\"" -DCREATOR="\"$(CREATOR)\"" -DDISCORD="\"$(DISCORD)\"" -DNAME="\"$(NAME)\"" \
 				-DABOUT="\"$(ABOUT)\"" -DMAJOR="\"$(MAJOR)\"" -DMINOR="\"$(MINOR)\"" -DREV="\"$(REV)\"" -DDATE="\"$(DATE)\""
 
 ifeq ($(DEBUG_BUILD),true)

@@ -9,6 +9,7 @@ using IteratorOverDOsDestructor_t = void (*)(nn::nex::SelectionIteratorTemplate_
 using InitRankboard_t = void (*)(void *);
 using IsDisconnected_t = bool (*)(Net::StationBufferManager *, u8);
 using GetRaceInfo_t = RaceSys::CRaceInfo * (*)(void);
+using KartInfoProxy_t = void (*)(Kart::Vehicle * &, u8);
 
 namespace base
 {
@@ -25,6 +26,7 @@ namespace base
 		InitRankboard_t init_rankBoard;
 		IsDisconnected_t is_disconnected;
 		GetRaceInfo_t get_race_info;
+		KartInfoProxy_t kart_info_proxy;
 
         Net::NetworkEngine **m_network_engine;
 		void *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
@@ -38,6 +40,14 @@ namespace base
 		void *m_CourseVoteListSetTexture; // unknown symbol
 		void *m_Sequence_MenuWiFi_Confirm_onPageEnter;
 		void *m_Kart_Vehicle_calcMove;
+		void *m_Effect_KartEffect_calcAfterCameraUpdate;
+		void *m_Kart_Camera_calcApply;
+		void *m_Item_ItemDirector_slot_StartSlot;
+		void *m_Effect_KartEffect_calcCameraEffectImpl;
+		void *m_Effect_KartEffect_calcEnvEffect;
+		void *m_Effect_KartEffect_createGessoTrig;
+		void *m_Effect_KartEffect_createWaterOutTrig;
+		void *m_Sequence_BaseRacePage_drawItemIcon;
 	};
 
 	inline pointers *g_pointers{};

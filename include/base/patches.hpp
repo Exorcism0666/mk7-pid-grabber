@@ -21,6 +21,9 @@ namespace base
         memory::patch<u32> m_mii_head_on_votes_0;
         memory::patch<u32> m_mii_head_on_votes_1;
         memory::patch<u32> m_mii_head_on_minimap;
+
+        memory::patch<u32> m_items_on_extended_map_0;
+        memory::patch<u32> m_items_on_extended_map_1;
     };
 
     inline patches *g_patches{};

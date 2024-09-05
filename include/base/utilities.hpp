@@ -32,5 +32,8 @@ namespace base
         static bool is_local_client(u32, bool);
         static bool is_duplicate(std::vector<PlayerInfo>, PlayerInfo);
         static bool is_connected(u8);
+        static Kart::Vehicle * get_kart(u8);
+        static bool is_in_race();
+        static void get_next_player(u8 &, bool);
     };
 }

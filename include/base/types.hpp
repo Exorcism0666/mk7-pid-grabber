@@ -45,7 +45,8 @@ namespace nn::nex
     {
         u8 gap0[0x58];
         u32 station_id;
-        u8 gap1[0x30];
+        u8 gap1[0x2C];
+        u32 url_length;
         u32 station_url;
     };
     static_assert(sizeof(Station) == 0x90);
@@ -168,34 +169,78 @@ namespace Net
     static_assert(sizeof(NetworkEngine) == 0x2BC);
 }
 
+struct CRaceInfo {
+        u8 kartInfos[0xA0];
+        u32 courseID;
+        u32 raceMode[3];
+        u32 engineLevel; 
+        bool isMirror;
+        bool teamsEnabled;
+        u8 unknown4;
+        u32 raceModeFlag;
+        u32 itemMode;
+        u32 playerAmount;
+        u16 detailID;
+        u16 masterID;
+        u32 randomSeeds[2];
+    };
+
 namespace RaceSys
 {
     struct CRaceInfo
     {
-        u8 gap0[0x184];
+        u8 gap0[0x180];
+        u32 player_amount;
         u16 master_id;
     };
-    static_assert(sizeof(CRaceInfo) == 0x186);
 }
 
 namespace Kart
 {
+    struct Director
+    {
+    };
+
     struct Vehicle
     {
         u8 gap0[0x78];
-        void *director;
+        Director *director;
         u8 gap1[8];
         u16 player_id;
         u8 gap2[0x12];
         bool is_master;
-        u8 gap3;
+        bool is_cpu;
         bool is_ai;
         u8 gap4[3];
         bool is_net_recv;
         u8 gap5[7];
         bool is_goal;
     };
-    static_assert(sizeof(Vehicle) == 0xA8);
+
+    struct InfoProxy
+    {
+        Vehicle *vehicle;
+    };
+
+    struct Camera
+    {
+        u8 gap0[0xD4];
+        bool available;
+        InfoProxy *info_proxy;
+    };
+
+    struct VehicleReact : Vehicle
+    {
+    };
+}
+
+namespace Effect
+{
+    struct KartEffect
+    {
+        u8 gap[0x1FC];
+        Kart::InfoProxy *info_proxy;
+    };
 }
 
 struct OpponentInfo

@@ -23,10 +23,11 @@ namespace base
 			}
 			session_logger;
 
-			bool force_cpu_mode{ false };
+			bool spectator_mode{ false };
 			bool render_optimizations{ false };
 			bool spectator_rankboard{ false };
 			bool show_mii_heads{ false };
+			bool items_on_extended_map{ false };
 
 			struct pid_display
 			{
