@@ -17,7 +17,12 @@ namespace base
         m_mii_head_on_votes_1(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_Menu_UpBarController_setTex + 0x30), { 0xE3A01009 }),
         m_mii_head_on_minimap(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_BaseRacePage_initMapIcon + 0x584), { 0xE3A00009 }),
         m_items_on_extended_map_0(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_BaseRacePage_drawItemIcon + 0x44), { 0 }),
-        m_items_on_extended_map_1(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_BaseRacePage_drawItemIcon + 0x28C), { 0 })
+        m_items_on_extended_map_1(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_BaseRacePage_drawItemIcon + 0x28C), { 0 }),
+        m_disable_oob_camera(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcApply + 0x11B4), { 0xE3A01000 }),
+        m_disable_fade_out_0(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Vehicle_calcMove + 0x310), { 0 }),
+        m_disable_fade_out_1(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Vehicle_startFadeOut), { 0xE12FFF1E }),
+        m_disable_goal_demo(reinterpret_cast<void *>((u32)g_pointers->m_Demo_DemoCameraDirector_startGoalDemo), { 0xE12FFF1E }),
+        m_disable_title_demo(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_MenuTitle_onPageEnter + 0x98), { 0xE3A00000 })
     {
         g_patches = this;
     }

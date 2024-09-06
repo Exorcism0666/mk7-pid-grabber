@@ -138,6 +138,21 @@ namespace base
 			m_Sequence_BaseRacePage_drawItemIcon = handle.sub(0x34).as<decltype(m_Sequence_BaseRacePage_drawItemIcon)>();
 		});
 
+		batch.add("Kart::Vehicle::startFadeOut", "10 40 2D E9 00 40 A0 E1 ? ? ? EB ? ? 9F E5 10 00 90 E5 1E 0E 80 E2 50 10 D0 E5 00 00 51 E3 4C 00 90 15", [this](memory::handle handle)
+		{
+			m_Kart_Vehicle_startFadeOut = handle.as<decltype(m_Kart_Vehicle_startFadeOut)>();
+		});
+
+		batch.add("RaceSys::ModeManagerBase::calc", "00 50 A0 E3 94 50 84 E5 18 20 D4 E5 04 00 A0 E3 01 10 A0 E3 19 20 C4 E5 18 00 C4 E5", [this](memory::handle handle)
+		{
+			m_Demo_DemoCameraDirector_startGoalDemo = handle.sub(0x14).as<decltype(m_Demo_DemoCameraDirector_startGoalDemo)>();
+		});
+
+		batch.add("Sequence::MenuTitle::onPageEnter", "F0 47 2D E9 00 40 A0 E1 28 D0 4D E2 E4 72 9F E5", [this](memory::handle handle)
+		{
+			m_Sequence_MenuTitle_onPageEnter = handle.as<decltype(m_Sequence_MenuTitle_onPageEnter)>();
+		});
+		
 		batch.run(memory::ranges::c_text);
 		
 		g_pointers = this;

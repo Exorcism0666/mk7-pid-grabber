@@ -15,5 +15,6 @@ namespace base
 		static bool block_item(u8);
 		static bool ignore_effect(Effect::KartEffect *);
 		static void change_target(Kart::Camera *);
+		static bool ignore_vehicle(Kart::Vehicle *);
 	};
 }

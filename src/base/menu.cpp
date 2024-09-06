@@ -30,6 +30,8 @@ using namespace CTRPluginFramework;
 #define SPECTATOR_NOTE Color::SkyBlue << "This entry puts you into spectator mode.\nPress \uE07C or \uE07B to swap.\n\n" << Color::Orange << "You can't undo it until the next race."
 #define ITEMS_ON_MAP_NOTE Color::SkyBlue << "This entry displays people's items on the extended minimap."
 
+#define FEATURES_FOLDER_NOTE Color::SkyBlue << "This folder contains additional features"
+
 namespace base
 {
     menu::menu()
@@ -41,7 +43,7 @@ namespace base
         m_session_logger_entry(new MenuEntry("Session Logger", nullptr, entries::session_logger, SESSION_LOGGER_NOTE)),
         m_spectator_mode_entry(new MenuEntry("Spectator Mode", entries::spectator_mode, SPECTATOR_NOTE)),
         m_render_optimizations_entry(new MenuEntry("Render Optimizations", entries::render_optimizations, RENDER_OPTIMIZATIONS_NOTE)),
-        m_spectator_rankboard_entry(new MenuEntry("Spectator Mode Rankboard", entries::load_rankboard, LIVE_RANKBOARD_NOTE)),
+        m_spectator_rankboard_entry(new MenuEntry("Enable Live View Rankboard", entries::load_rankboard, LIVE_RANKBOARD_NOTE)),
         m_show_mii_heads_entry(new MenuEntry("Mii Heads On Vote/Bottom Screen", entries::show_mii_heads, MII_HEADS_NOTE)),
         m_items_on_extended_map_entry(new MenuEntry("Show Items On Extended Mini Map", entries::items_on_extended_map, ITEMS_ON_MAP_NOTE)),
         m_pid_display_settings_entry(new MenuEntry("PID Display Settings", nullptr, entries::pid_display_settings, PID_SETTINGS_NOTE))
@@ -109,7 +111,7 @@ namespace base
         *m_plugin_menu += m_opponent_list_entry;
         *m_plugin_menu += m_session_logger_entry;
         
-        if (auto folder = new MenuFolder("Additional Features"))
+        if (auto folder = new MenuFolder("Additional Features", FEATURES_FOLDER_NOTE))
         {
             *folder += m_spectator_mode_entry;
             *folder += m_render_optimizations_entry;
@@ -125,7 +127,7 @@ namespace base
 
     void menu::finalize()
     {
-        *GetArg<menu_types::spectator_mode>(m_spectator_mode_entry) = { false, false, UINT8_MAX };
+        *GetArg<menu_types::spectator_mode>(m_spectator_mode_entry) = { false, false, false, UINT8_MAX };
 
         if (g_settings.m_options.spectator_mode)
             m_spectator_mode_entry->Enable();
@@ -145,11 +147,21 @@ namespace base
 
     void menu::reset_data()
     {
-        if (!utilities::is_in_race())
+        if (g_menu && !utilities::is_in_race(true))
         {
-            if (auto data = GetArg<menu_types::spectator_mode>(g_menu->m_spectator_mode_entry))
-                if (data->set || data->target_id != UINT8_MAX)
-                    *GetArg<menu_types::spectator_mode>(g_menu->m_spectator_mode_entry) = { false, false, UINT8_MAX };
+            auto data = GetArg<menu_types::spectator_mode>(g_menu->m_spectator_mode_entry);
+
+            if (!g_menu->m_spectator_mode_entry->IsActivated() && data->active)
+            {
+                g_patches->m_disable_oob_camera.disable();
+                g_patches->m_disable_fade_out_0.disable();
+                g_patches->m_disable_fade_out_1.disable();
+                g_patches->m_disable_goal_demo.disable();
+                g_patches->m_disable_title_demo.disable();
+            }
+
+            if (data->active || data->is_set || data->pending || data->target_id != UINT8_MAX)
+                *GetArg<menu_types::spectator_mode>(g_menu->m_spectator_mode_entry) = { false, false, false, UINT8_MAX };
         }
     }
 }

@@ -24,6 +24,12 @@ namespace base
 
         memory::patch<u32> m_items_on_extended_map_0;
         memory::patch<u32> m_items_on_extended_map_1;
+        
+        memory::patch<u32> m_disable_oob_camera;
+        memory::patch<u32> m_disable_fade_out_0;
+        memory::patch<u32> m_disable_fade_out_1;
+        memory::patch<u32> m_disable_goal_demo;
+        memory::patch<u32> m_disable_title_demo;
     };
 
     inline patches *g_patches{};

@@ -9,36 +9,37 @@ namespace base
 {
     void features::change_target(Kart::Camera *_this)
     {
-        if (g_menu->m_spectator_mode_entry->IsActivated())
+        if (!_this->available)
+            return;
+
+        auto data = GetArg<menu_types::spectator_mode>(g_menu->m_spectator_mode_entry);
+
+        if (g_menu->m_spectator_mode_entry->IsActivated() || data->active)
         {
-            if (g_pointers->get_race_info()->player_amount == 1)
+            if (utilities::is_alone())
                 return;
 
-            auto data = GetArg<menu_types::spectator_mode>(g_menu->m_spectator_mode_entry);
-
-            auto vehicle = _this->info_proxy->vehicle;
-
-            if (!data->set && vehicle->is_master && !vehicle->is_net_recv)
+            if (!data->is_set && utilities::is_master(_this->info_proxy->vehicle, true))
             {
                 if (!data->pending)
                 {
-                    utilities::get_next_player(data->target_id, false);
+                    utilities::get_next_player(data->target_id, false, !utilities::is_spectating());
 
                     data->pending = true;
                 }
 
-                if (!data->set)
-                    data->set = true;
+                if (!data->is_set)
+                    data->is_set = true;
             }
 
-            if (data->set)
+            if (data->is_set)
             {
                 if (Controller::IsKeyPressed(DPadRight))
                 {
                     if (!data->pending)
                     {
-                        utilities::get_next_player(data->target_id, false);
-
+                        utilities::get_next_player(data->target_id, false, !utilities::is_spectating());
+                        
                         data->pending = true;
                     }
                 }
@@ -46,8 +47,8 @@ namespace base
                 {
                     if (!data->pending)
                     {
-                        utilities::get_next_player(data->target_id, true);
-
+                        utilities::get_next_player(data->target_id, true, !utilities::is_spectating());
+                        
                         data->pending = true;
                     }
                 }

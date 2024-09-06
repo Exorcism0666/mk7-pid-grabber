@@ -37,7 +37,7 @@ namespace base
 		void *m_Mii_MiiEngine_createMiiFace;
 		void *m_Sequence_Menu_UpBarController_setTex;
 		void *m_Sequence_BaseRacePage_initMapIcon;
-		void *m_CourseVoteListSetTexture; // unknown symbol
+		void *m_CourseVoteListSetTexture;
 		void *m_Sequence_MenuWiFi_Confirm_onPageEnter;
 		void *m_Kart_Vehicle_calcMove;
 		void *m_Effect_KartEffect_calcAfterCameraUpdate;
@@ -48,6 +48,9 @@ namespace base
 		void *m_Effect_KartEffect_createGessoTrig;
 		void *m_Effect_KartEffect_createWaterOutTrig;
 		void *m_Sequence_BaseRacePage_drawItemIcon;
+		void *m_Kart_Vehicle_startFadeOut;
+		void *m_Demo_DemoCameraDirector_startGoalDemo;
+		void *m_Sequence_MenuTitle_onPageEnter;
 	};
 
 	inline pointers *g_pointers{};

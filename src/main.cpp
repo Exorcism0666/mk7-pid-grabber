@@ -14,7 +14,7 @@ namespace CTRPluginFramework
 
     int main()
     {
-		auto files_instance = std::make_unique<files>();
+        auto files_instance = std::make_unique<files>();
 
         g_settings.load();
 

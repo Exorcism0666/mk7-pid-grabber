@@ -33,7 +33,10 @@ namespace base
         static bool is_duplicate(std::vector<PlayerInfo>, PlayerInfo);
         static bool is_connected(u8);
         static Kart::Vehicle * get_kart(u8);
-        static bool is_in_race();
-        static void get_next_player(u8 &, bool);
+        static bool is_spectating();
+        static bool is_in_race(bool);
+        static void get_next_player(u8 &, bool, bool);
+        static bool is_master(Kart::Vehicle *, bool);
+        static bool is_alone();
     };
 }

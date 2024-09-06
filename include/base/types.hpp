@@ -192,6 +192,7 @@ namespace RaceSys
         u8 gap0[0x180];
         u32 player_amount;
         u16 master_id;
+        u16 detail_id;
     };
 }
 
@@ -199,6 +200,8 @@ namespace Kart
 {
     struct Director
     {
+        u8 gap0[0x30];
+        u16 camera_target_id;
     };
 
     struct Vehicle
@@ -260,4 +263,16 @@ struct PlayerInfo
     {
         return (player.info.name == info.name && player.info.principal_id == info.principal_id);
     }
+};
+
+enum class RaceCheckState : u8
+{
+    NotInRace = 7,
+    InRace = 8
+};
+
+struct RaceCheck
+{
+    u8 gap0[0x18];
+    RaceCheckState state;
 };

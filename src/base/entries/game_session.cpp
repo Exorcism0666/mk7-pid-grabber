@@ -41,15 +41,15 @@ namespace base
             switch (pid_display.mode)
             {
                 case decltype(pid_display.mode)::Decimal:
-                    keyboard_message += utilities::format_output("Principal ID", std::format("{:d}", principal_id), false);
+                    keyboard_message += utilities::format_output("Principal ID", std::format("{:d}", principal_id), true);
                 break;
 
                 case decltype(pid_display.mode)::Hexadecimal:
-                    keyboard_message += utilities::format_output("Principal ID", std::format("0x{:X}", principal_id), false);
+                    keyboard_message += utilities::format_output("Principal ID", std::format("0x{:X}", principal_id), true);
                 break;
                 
                 case decltype(pid_display.mode)::Both:
-                    keyboard_message += utilities::format_output("Principal ID (DEC)", std::format("{:d}", principal_id), false);
+                    keyboard_message += utilities::format_output("Principal ID (DEC)", std::format("{:d}", principal_id), true);
                     keyboard_message += utilities::format_output("Principal ID (HEX)", std::format("0x{:X}", principal_id), true);
                 break;
             }

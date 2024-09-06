@@ -314,40 +314,69 @@ namespace base
         return vehicle;
     }
 
-    bool utilities::is_in_race()
+    bool utilities::is_spectating()
     {
-        if (auto offset = *(u32 *)(0x14000084))
-            if (offset = *(u32 *)(offset + 0x316C))
-                if (*(bool *)(offset + 0x118))
-                    if (auto race_info = g_pointers->get_race_info())
-                        return (race_info->master_id != UINT16_MAX);
+        auto race_check = *reinterpret_cast<RaceCheck **>(0x667470);
+
+        if (race_check->state == RaceCheckState::InRace)
+            if (auto race_info = g_pointers->get_race_info())
+                return (race_info->master_id == UINT16_MAX);
 
         return false;
     }
 
-    void utilities::get_next_player(u8 &index, bool backwards)
-	{
-        auto race_info = g_pointers->get_race_info();
-        auto max_amount = (race_info->player_amount - 1);
-        auto player_id = race_info->master_id;
+    bool utilities::is_in_race(bool allow_spectate)
+    {
+        auto race_check = *reinterpret_cast<RaceCheck **>(0x667470);
 
-        do
+        if (race_check->state == RaceCheckState::InRace)
+            if (auto race_info = g_pointers->get_race_info())
+                return (allow_spectate ? true : !is_spectating());  
+
+        return false;
+    }
+
+    void utilities::get_next_player(u8 &index, bool backwards, bool exclude_local_client)
+	{
+        if (auto race_info = g_pointers->get_race_info())
         {
-            if (!backwards)
+            auto max_amount = (race_info->player_amount - 1);
+
+            do
             {
-                index++;
-                
-                if (index > max_amount)
-                    index = 0;
+                if (!backwards)
+                {
+                    index++;
+                    
+                    if (index > max_amount)
+                        index = 0;
+                }
+                else
+                {
+                    index--;
+                    
+                    if (index < 0 || index > max_amount)
+                        index = max_amount;
+                }
             }
-            else
-            {
-                index--;
-                
-                if (index < 0 || index > max_amount)
-                    index = max_amount;
-            }
+            while (exclude_local_client && !is_spectating() && index == race_info->master_id);
         }
-        while (index == player_id);
-	}
+    }
+
+    bool utilities::is_master(Kart::Vehicle *vehicle, bool allow_spectate)
+    {
+        if (allow_spectate)
+            return vehicle->is_master;
+
+        return (vehicle->is_master && !vehicle->is_net_recv);
+    }
+
+    bool utilities::is_alone()
+    {
+        if (is_in_race(true))
+            if (auto race_info = g_pointers->get_race_info())
+                return (race_info->player_amount == 0 || race_info->player_amount == 1);
+        
+        return false;
+    }
 }
