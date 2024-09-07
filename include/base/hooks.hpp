@@ -16,5 +16,7 @@ namespace base
 		static void Effect_KartEffect_calcEnvEffect(Effect::KartEffect *);
 		static void Effect_KartEffect_createGessoTrig(Effect::KartEffect *);
 		static void Effect_KartEffect_createWaterOutTrig(Effect::KartEffect *);
+		static bool Item_ItemDirector_itemEventRecvHandler(void *, Net::NetworkItemEventDataMgr::SlotData *);
+		static bool Kart_NetData_read(void *, void *, Kart::NetData **, Kart::NetData **);
 	};
 }

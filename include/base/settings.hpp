@@ -23,9 +23,15 @@ namespace base
 			}
 			session_logger;
 
-			bool spectator_mode{ false };
+			struct spectator_mode
+			{
+				bool toggle{ false };
+				bool reset{ false };
+			}
+			spectator_mode;
+
 			bool render_optimizations{ false };
-			bool spectator_rankboard{ false };
+			bool load_rankboard{ false };
 			bool show_mii_heads{ false };
 			bool items_on_extended_map{ false };
 

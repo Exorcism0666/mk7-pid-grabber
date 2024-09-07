@@ -7,7 +7,7 @@ namespace base
 {
 	struct features
 	{
-		static void spectator_rankboard(void *);
+		static void load_rankboard(void *);
 		static void clean_principal_id();
 		static void dump_session();
 		static void change_to_ai(Kart::Vehicle *);
@@ -16,5 +16,7 @@ namespace base
 		static bool ignore_effect(Effect::KartEffect *);
 		static void change_target(Kart::Camera *);
 		static bool ignore_vehicle(Kart::Vehicle *);
+		static bool check_item_event(Net::NetworkItemEventDataMgr::SlotData *);
+		static void lag_elimination(Kart::NetData *);
 	};
 }

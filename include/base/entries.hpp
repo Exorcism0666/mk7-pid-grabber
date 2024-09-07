@@ -12,7 +12,7 @@ namespace base
 		static void session_logger(CTRPluginFramework::MenuEntry *);
 		static void spectator_mode(CTRPluginFramework::MenuEntry *);
 		static void render_optimizations(CTRPluginFramework::MenuEntry *);
-		static void load_rankboard(CTRPluginFramework::MenuEntry *);
+		static void toggle_rankboard(CTRPluginFramework::MenuEntry *);
 		static void show_mii_heads(CTRPluginFramework::MenuEntry *);
 		static void items_on_extended_map(CTRPluginFramework::MenuEntry *);
 		static void pid_display_settings(CTRPluginFramework::MenuEntry *);

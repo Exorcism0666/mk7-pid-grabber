@@ -51,6 +51,9 @@ namespace base
 		void *m_Kart_Vehicle_startFadeOut;
 		void *m_Demo_DemoCameraDirector_startGoalDemo;
 		void *m_Sequence_MenuTitle_onPageEnter;
+		void *m_Item_ItemDirector_itemEventRecvHandler;
+		void *m_System_KDPadDirector_calc;
+		void *m_Kart_NetData_read;
 	};
 
 	inline pointers *g_pointers{};

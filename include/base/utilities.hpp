@@ -37,6 +37,7 @@ namespace base
         static bool is_in_race(bool);
         static void get_next_player(u8 &, bool, bool);
         static bool is_master(Kart::Vehicle *, bool);
-        static bool is_alone();
+        static bool is_online();
+        static u8 get_my_player_id();
     };
 }

@@ -51,27 +51,27 @@ namespace nn::nex
     };
     static_assert(sizeof(Station) == 0x90);
 
-    struct Selection
+    struct Selection // credits to Anto726
     {
         u8 gap0[0x21];
     };
     static_assert(sizeof(Selection) == 0x21);
 
-    struct DOSelections
+    struct DOSelections // credits to Anto726
     {
         void *vmt;
         Selection selections[3];
     };
     static_assert(sizeof(DOSelections) == 0x68);
 
-    struct DOFilter
+    struct DOFilter // credits to Anto726
     {
         u8 gap0[4];
         u16 count;
     };
     static_assert(sizeof(DOFilter) == 6);
 
-    struct DORef
+    struct DORef // credits to Anto726
     {
         void *vmt;
         Station *station;
@@ -82,7 +82,7 @@ namespace nn::nex
     };
     static_assert(sizeof(DORef) == 0x24);
 
-    struct IteratorOverDOs
+    struct IteratorOverDOs // credits to Anto726
     {
         void *vmt;
         DOSelections *do_selections;
@@ -90,7 +90,7 @@ namespace nn::nex
     };
     static_assert(sizeof(IteratorOverDOs) == 0x2C);
 
-    struct SelectionIteratorTemplate_Station : IteratorOverDOs
+    struct SelectionIteratorTemplate_Station : IteratorOverDOs // credits to Anto726
     {
     };
 }
@@ -123,6 +123,53 @@ namespace System
     };
 }
 
+namespace Item
+{
+    enum class ItemSlot : u8
+    {
+        Banana = 0,
+        GreenShell = 1,
+        RedShell = 2,
+        Mushroom = 3,
+        BobOmb = 4,
+        Blooper = 5,
+        BlueShell = 6,
+        TripleMushroom = 7,
+        Star = 8,
+        BulletBill = 9,
+        Lightning = 10,
+        GoldenMushroom = 11,
+        FireFlower = 12,
+        TanookiTail = 13,
+        LuckySeven = 14,
+        FakeItemBox = 15,
+        MegaMushroom = 16,
+        TripleBanana = 17,
+        TripleGreenShell = 18,
+        TripleRedShell = 19
+    };
+
+    enum class ItemType : u8
+    {
+        GreenShell = 0,
+        RedShell = 1,
+        Banana = 2,
+        Mushroom = 3,
+        Star = 4,
+        BlueShell = 5,
+        Lightning = 6,
+        FakeItemBox = 7,
+        GoldenMushroom = 8,
+        BobOmb = 9,
+        Blooper = 10,
+        MegaMushroom = 11,
+        BulletBill = 12,
+        FireFlower = 13,
+        TanookiTail = 14,
+        LuckySeven = 15
+    };
+}
+
 namespace Net
 {
     struct SessionNetZ
@@ -134,7 +181,7 @@ namespace Net
 
     struct NetworkPlayerData : System::PlayerData
     {
-        u32 gap0;
+        u8 gap0[4];
         bool created;
     };
     static_assert(sizeof(NetworkPlayerData) == 0xA8);
@@ -158,32 +205,39 @@ namespace Net
     {
         u8 gap0[0x13C];
         SessionNetZ *session_net_z;
-        u8 gap1[0x11C];
+        u8 gap1[0xC];
+        u32 online_check_1;
+        u8 gap2[0x10C];
         StationBufferManager *station_buffer_mgr;
-        u8 gap2[4];
+        bool online_check_2;
         u32 local_station_id;
         u32 local_player_id;
         u8 gap3[0x4C];
         NetworkPlayerDataManager *network_player_data_mgr;
+        u8 gap4[0x247];
+        bool online_check_3;
     };
-    static_assert(sizeof(NetworkEngine) == 0x2BC);
-}
+    static_assert(sizeof(NetworkEngine) == 0x504);
 
-struct CRaceInfo {
-        u8 kartInfos[0xA0];
-        u32 courseID;
-        u32 raceMode[3];
-        u32 engineLevel; 
-        bool isMirror;
-        bool teamsEnabled;
-        u8 unknown4;
-        u32 raceModeFlag;
-        u32 itemMode;
-        u32 playerAmount;
-        u16 detailID;
-        u16 masterID;
-        u32 randomSeeds[2];
+    struct NetworkItemEventDataMgr // credits to Anto726
+    {
+        enum class EventType : u8
+        {
+            SelfMove = 2
+        };
+
+        struct SlotData
+        {
+            u8 gap0[4];
+            Item::ItemType item_type;
+            EventType event_type;
+            u8 gap1[2];
+            u8 player_id;
+            u8 gap2;
+            bool is_dropped;
+        };
     };
+}
 
 namespace RaceSys
 {
@@ -228,18 +282,46 @@ namespace Kart
     struct Camera
     {
         u8 gap0[0xD4];
-        bool available;
+        bool is_master;
         InfoProxy *info_proxy;
     };
 
     struct VehicleReact : Vehicle
     {
     };
+
+    struct KartData // credits to Anto726
+    {
+        u32 _0x1 : 1;
+        u32 _0x2 : 1;
+        u32 _0x4 : 1;
+        u32 _0x8 : 1;
+        u32 _0x10 : 1;
+        u32 _0x20 : 1;
+        u32 _0x40 : 1;
+        u32 _0x80 : 1;
+        u32 _0x100 : 1;
+        u32 _0x200 : 1;
+        u32 _0x400 : 1;
+        u32 _0x800 : 1;
+        u32 _0x1000 : 1;
+        u32 _0x2000 : 1;
+        u32 _0x4000 : 1;
+        u32 _0x8000 : 1;
+        u32 _0x10000 : 1;
+        u32 warp : 1;
+    };
+
+    struct NetData
+    {
+        u8 gap0[4];
+        KartData kart_data;
+    };
 }
 
 namespace Effect
 {
-    struct KartEffect
+    struct KartEffect // credits to Anto726
     {
         u8 gap[0x1FC];
         Kart::InfoProxy *info_proxy;

@@ -16,7 +16,7 @@ namespace base
         
         void create();
         void finalize();
-        static void reset_data();
+        static void manage_data();
 
         inline static std::map<bool, std::string> s_toggles =
         {
@@ -38,7 +38,7 @@ namespace base
         CTRPluginFramework::MenuEntry *m_session_logger_entry;
         CTRPluginFramework::MenuEntry *m_spectator_mode_entry;
         CTRPluginFramework::MenuEntry *m_render_optimizations_entry;
-        CTRPluginFramework::MenuEntry *m_spectator_rankboard_entry;
+        CTRPluginFramework::MenuEntry *m_load_rankboard_entry;
         CTRPluginFramework::MenuEntry *m_show_mii_heads_entry;
         CTRPluginFramework::MenuEntry *m_items_on_extended_map_entry;
         CTRPluginFramework::MenuEntry *m_pid_display_settings_entry;

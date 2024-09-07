@@ -8,7 +8,7 @@ namespace base::menu_types
     struct spectator_mode
     {
         bool active;
-        bool is_set;
+        bool reset;
         bool pending;
         u8 target_id;
     };

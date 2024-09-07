@@ -35,6 +35,8 @@ namespace base
         hook_types::detour_hook m_Effect_KartEffect_calcEnvEffect_hook;
         hook_types::detour_hook m_Effect_KartEffect_createGessoTrig_hook;
         hook_types::detour_hook m_Effect_KartEffect_createWaterOutTrig_hook;
+        hook_types::detour_hook m_Item_ItemDirector_itemEventRecvHandler_hook;
+        hook_types::detour_hook m_Kart_NetData_read_hook;
     };
 
     inline hooking *g_hooking{};
