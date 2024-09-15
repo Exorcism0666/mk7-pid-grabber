@@ -97,20 +97,20 @@ namespace base
                             switch (pid_display.mode)
                             {
                                 case decltype(pid_display.mode)::Decimal:
-                                    message_box += utilities::format_output("Spoofed PID", std::format("{:d}", principal_id), false) + "\n\n";
+                                    message_box += utilities::format_output("Spoofed PID", std::format("{:d}", principal_id), false);
                                 break;
 
                                 case decltype(pid_display.mode)::Hexadecimal:
-                                    message_box += utilities::format_output("Spoofed PID", std::format("0x{:X}", principal_id), false) + "\n\n";
+                                    message_box += utilities::format_output("Spoofed PID", std::format("0x{:X}", principal_id), false);
                                 break;
 
                                 case decltype(pid_display.mode)::Both:
                                     message_box += utilities::format_output("Spoofed PID (DEC)", std::format("{:d}", principal_id), false);
-                                    message_box += utilities::format_output("Spoofed PID (HEX)", std::format("0x{:X}", principal_id), true) + "\n\n";
+                                    message_box += utilities::format_output("Spoofed PID (HEX)", std::format("0x{:X}", principal_id), true);
                                 break;
                             }
 
-                            message_box += utilities::format_output("Spoofed FC", utilities::format_friendcode(utilities::pid_to_fc(principal_id)), true);
+                            message_box += utilities::format_output("Spoofed FC", utilities::format_friendcode(utilities::pid_to_fc(principal_id)), true) + "\n";
                             
                             principal_id = clean_pid;
 
