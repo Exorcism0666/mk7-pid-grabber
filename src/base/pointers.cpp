@@ -167,6 +167,11 @@ namespace base
 		{
 			m_Kart_NetData_read = handle.as<decltype(m_Kart_NetData_read)>();
 		});
+
+		batch.add("Kart::Camera::calcDraw", "70 40 2D E9 00 40 A0 E1 04 8B 2D ED 70 D0 4D E2 D4 00 D0 E5 00 00 50 E3 C8 00 00 0A D8 00 94 E5 00 00 90 E5 EC 00 90 E5", [this](memory::handle handle)
+		{
+			m_Kart_Camera_calcDraw = handle.as<decltype(m_Kart_Camera_calcDraw)>();
+		});
 		
 		batch.run(memory::ranges::c_text);
 		

@@ -24,7 +24,9 @@ namespace base
         m_disable_goal_demo(reinterpret_cast<void *>((u32)g_pointers->m_Demo_DemoCameraDirector_startGoalDemo), { 0xE12FFF1E }),
         m_disable_title_demo(reinterpret_cast<void *>((u32)g_pointers->m_Sequence_MenuTitle_onPageEnter + 0x98), { 0xE3A00000 }),
         m_disable_fpv(reinterpret_cast<void *>((u32)g_pointers->m_System_KDPadDirector_calc + 0xEC), { 0xE3A01000 }),
-        m_disable_fog(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcApply + 0x770), { 0xE3A01000 })
+        m_disable_fog(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcApply + 0x770), { 0xE3A01000 }),
+        m_fix_camera_draw_0(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcDraw + 0x8A4), { 0xE3A01000 }),
+        m_fix_camera_draw_1(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcDraw + 0xC04), { 0xE3A00000 })
     {
         g_patches = this;
     }

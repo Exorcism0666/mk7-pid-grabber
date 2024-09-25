@@ -55,7 +55,7 @@ namespace base
             }
             
             keyboard_message += utilities::format_output("Friend Code", utilities::format_friendcode(utilities::pid_to_fc(principal_id)), true);
-
+            
             Keyboard keyboard(keyboard_message, items);
             keyboard.CanAbort(true);
             

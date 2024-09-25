@@ -54,6 +54,7 @@ namespace base
 		void *m_Item_ItemDirector_itemEventRecvHandler;
 		void *m_System_KDPadDirector_calc;
 		void *m_Kart_NetData_read;
+		void *m_Kart_Camera_calcDraw;
 	};
 
 	inline pointers *g_pointers{};

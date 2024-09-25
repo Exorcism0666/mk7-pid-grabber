@@ -168,6 +168,8 @@ namespace base
                     g_patches->m_disable_goal_demo.enable();
                     g_patches->m_disable_fpv.enable();
                     g_patches->m_disable_fog.enable();
+                    g_patches->m_fix_camera_draw_0.enable();
+                    g_patches->m_fix_camera_draw_1.enable();
 
                     data->active = true;
                 }
@@ -190,6 +192,8 @@ namespace base
                 g_patches->m_disable_goal_demo.disable();
                 g_patches->m_disable_fpv.disable();
                 g_patches->m_disable_fog.disable();
+                g_patches->m_fix_camera_draw_0.disable();
+                g_patches->m_fix_camera_draw_1.disable();
 
                 *data = { false, false, false, UINT8_MAX };
             }

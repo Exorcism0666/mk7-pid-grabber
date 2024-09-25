@@ -20,7 +20,7 @@ namespace base
 
             session += std::format("MK7-PID-Grabber for Mario Kart 7 created by {}\nGithub: {}\nUpdate: {}", CREATOR, GITHUB, DATE);
 
-            session += std::format("\n\nDate Time: {}\nSession ID: {:d}", g_logger.get_current_date_time_string(true), network_engine->session_net_z->room_id);
+            session += std::format("\n\nDate Time: {}\nSession ID: {:d}", logger::get_current_date_time_string(true), network_engine->session_net_z->room_id);
             
             session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), (network_engine->local_player_id + 1));
 

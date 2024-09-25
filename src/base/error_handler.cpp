@@ -16,7 +16,7 @@ namespace CTRPluginFramework
             Process::GetName(name);
 
             std::string log = std::format("Update: {}", DATE);
-            log += std::format("\nLog Date Time: {}", g_logger.get_current_date_time_string(true));
+            log += std::format("\nLog Date Time: {}", logger::get_current_date_time_string(true));
 
             log += std::format("\nProcess: {} ({:016X})\n", name, Process::GetTitleID());
 

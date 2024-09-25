@@ -109,7 +109,7 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 all: $(BUILD)
 
 $(BUILD):
-	@rm -fr $(DEBUG) *.3gx *.elf
+	@rm -fr $(DEBUG) *.3gx *.elf *.lst
 ifeq ($(DEBUG_BUILD),true)
 		@[ -d $(DEBUG) ] || mkdir -p $(DEBUG)
 endif
@@ -119,7 +119,7 @@ endif
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(DEBUG) $(BUILD) *.3gx *.elf
+	@rm -fr $(DEBUG) $(BUILD) *.3gx *.elf *.lst
 
 re: clean all
 
