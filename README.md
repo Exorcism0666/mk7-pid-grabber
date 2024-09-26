@@ -15,6 +15,7 @@ Use the the following `Title ID` depending on your version:
 - **USA**: `0004000000030800`
 - **EUR**: `0004000000030700`
 - **JPN**: `0004000000030600`
+- **KOR**: `0004000000030A00`
 
 > [!NOTE]
 > There are more versions however those are untested. If yours isn't included, find it through `FBI` under titles or [3dsdb](https://3dsdb.com/).
