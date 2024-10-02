@@ -31,6 +31,9 @@ namespace base
         memory::patch<u32> m_disable_fog;
         memory::patch<u32> m_fix_camera_draw_0;
         memory::patch<u32> m_fix_camera_draw_1;
+        memory::patch<u32> m_disable_blooper_0;
+        memory::patch<u32> m_disable_blooper_1;
+        memory::patch<u32> m_load_course_model;
     };
 
     inline patches *g_patches{};

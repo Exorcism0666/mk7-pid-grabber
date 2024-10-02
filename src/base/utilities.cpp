@@ -37,7 +37,7 @@ namespace base
         {
             auto file = g_logger.error("{}", error.c_str());
 
-            error += Color::SkyBlue << "\n\nFile Location:\n" << Color::DodgerBlue << std::format("sd:{}", file.GetFullName());
+            error = Color::SkyBlue << "File Location:\n" << Color::DodgerBlue << std::format("sd:{}", file.GetFullName());
         }
 
         MessageBox(Color::Orange << "An error occurred", error, DialogType::DialogOk, ClearScreen::Both)();
@@ -50,7 +50,7 @@ namespace base
         }
     }
 
-    void utilities::pop_up(std::string title, std::string text, bool update)
+    void utilities::popup(std::string title, std::string text, bool update)
     {
         if (update)
             text += Color::Turquoise << "\n\nUpdate" << Color::White << ": " << Color::Silver << DATE;
@@ -107,7 +107,7 @@ namespace base
         return g_pointers->get_network_player_data((*g_pointers->m_network_engine)->network_player_data_mgr, player_id);
     }
 
-    u32 utilities::get_station_id(u8 player_id, bool padding)
+    u32 utilities::get_station_id(u8 player_id, bool use_handle)
     {
         auto list = (*g_pointers->m_network_engine)->station_buffer_mgr->racers;
 
@@ -115,7 +115,7 @@ namespace base
             return {};
         
         if (auto station_info = list->entries[player_id].station_info)
-            return (padding ? station_info->padded_station_id : station_info->station_id);
+            return (use_handle ? station_info->do_handle : station_info->station_id);
 
         return {};
     }
@@ -196,8 +196,8 @@ namespace base
 
             if (is_duplicate(list, player))
             {
-                player.info.name = "Player";
                 player.loaded = false;
+                player.info.name = "Player";
             }
 
             list.push_back(player);

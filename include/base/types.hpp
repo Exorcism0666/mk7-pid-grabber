@@ -18,29 +18,6 @@
 
 namespace nn::nex
 {
-    struct StationInfo
-    {
-        u32 magic;
-        u32 unkn0;
-        u32 station_id;
-        u32 padded_station_id;
-        u32 unkn1;
-    };
-    static_assert(sizeof(StationInfo) == 0x14);
-
-    struct StationListEntry
-    {
-        StationInfo *station_info;
-        u32 player_id;
-        u32 index;
-    };
-    static_assert(sizeof(StationListEntry) == 0xC);
-
-    struct StationList
-    {
-        StationListEntry entries[0x11];
-    };
-
     struct Station
     {
         u8 gap0[0x58];
@@ -49,7 +26,6 @@ namespace nn::nex
         u32 url_length;
         u32 station_url;
     };
-    static_assert(sizeof(Station) == 0x90);
 
     struct Selection // credits to Anto726
     {
@@ -194,8 +170,31 @@ namespace Net
 
     struct StationBufferManager
     {
+        struct StationInfo // credits to Anto726
+        {
+            u32 status;
+            bool is_ai;
+            u32 station_id;
+            u32 do_handle;
+            u32 player_id;
+        };
+        static_assert(sizeof(StationInfo) == 0x14);
+
+        struct ConnectorInfo // credits to Anto726
+        {
+            StationInfo *station_info;
+            u32 player_id;
+            u32 aid;
+        };
+        static_assert(sizeof(ConnectorInfo) == 0xC);
+
+        struct StationList
+        {
+            ConnectorInfo entries[0x11];
+        };
+
         u8 gap0[0x80];
-        nn::nex::StationList *racers;
+        StationList *racers;
         u8 gap1[0x4C];
         u32 peer_amount;
     };

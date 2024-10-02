@@ -75,8 +75,12 @@ namespace base
         m_plugin_menu->OnOpening = []()
         {
             Sleep(Milliseconds(100));
-            
+
+#ifdef _DEBUG
             return true;
+#endif
+            
+            return !utilities::is_in_race(true);
         };
 
         m_plugin_menu->Callback(manage_data);
@@ -170,6 +174,9 @@ namespace base
                     g_patches->m_disable_fog.enable();
                     g_patches->m_fix_camera_draw_0.enable();
                     g_patches->m_fix_camera_draw_1.enable();
+                    g_patches->m_disable_blooper_0.enable();
+                    g_patches->m_disable_blooper_1.enable();
+                    g_patches->m_load_course_model.enable();
 
                     data->active = true;
                 }
@@ -194,6 +201,9 @@ namespace base
                 g_patches->m_disable_fog.disable();
                 g_patches->m_fix_camera_draw_0.disable();
                 g_patches->m_fix_camera_draw_1.disable();
+                g_patches->m_disable_blooper_0.disable();
+                g_patches->m_disable_blooper_1.disable();
+                g_patches->m_load_course_model.disable();
 
                 *data = { false, false, false, UINT8_MAX };
             }

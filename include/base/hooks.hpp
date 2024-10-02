@@ -14,9 +14,8 @@ namespace base
 		static void Item_ItemDirector_slot_StartSlot(void *, u8, u8);
 		static void Effect_KartEffect_calcCameraEffectImpl(Effect::KartEffect *);
 		static void Effect_KartEffect_calcEnvEffect(Effect::KartEffect *);
-		static void Effect_KartEffect_createGessoTrig(Effect::KartEffect *);
 		static void Effect_KartEffect_createWaterOutTrig(Effect::KartEffect *);
 		static bool Item_ItemDirector_itemEventRecvHandler(void *, Net::NetworkItemEventDataMgr::SlotData *);
-		static bool Kart_NetData_read(void *, void *, Kart::NetData **, Kart::NetData **);
+		static bool Kart_NetData_read(Kart::NetData *, void *, Kart::NetData **, Kart::NetData **);
 	};
 }

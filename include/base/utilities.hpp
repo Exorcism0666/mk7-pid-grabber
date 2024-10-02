@@ -12,7 +12,7 @@ namespace base
         static bool check_process(std::string);
         static std::string read_file(CTRPluginFramework::File);
         static void print_error(std::string, bool);
-        static void pop_up(std::string, std::string, bool);
+        static void popup(std::string, std::string, bool);
         static std::string format_output(std::string, std::string, bool);
         static std::string format_friendcode(u64);
         static u64 pid_to_fc(u32);

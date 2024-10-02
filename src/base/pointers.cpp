@@ -123,11 +123,6 @@ namespace base
 			m_Effect_KartEffect_calcEnvEffect = handle.as<decltype(m_Effect_KartEffect_calcEnvEffect)>();
 		});
 
-		batch.add("Effect::KartEffect::createGessoTrig", "10 40 2D E9 00 40 A0 E1 14 00 90 E5 10 D0 4D E2 23 00 50 E3", [this](memory::handle handle)
-		{
-			m_Effect_KartEffect_createGessoTrig = handle.as<decltype(m_Effect_KartEffect_createGessoTrig)>();
-		});
-
 		batch.add("Effect::KartEffect::createWaterOutTrig", "10 40 2D E9 FC 11 90 E5 ? ? 9F E5 00 10 91 E5 16 0A 92 ED", [this](memory::handle handle)
 		{
 			m_Effect_KartEffect_createWaterOutTrig = handle.as<decltype(m_Effect_KartEffect_createWaterOutTrig)>();
@@ -171,6 +166,21 @@ namespace base
 		batch.add("Kart::Camera::calcDraw", "70 40 2D E9 00 40 A0 E1 04 8B 2D ED 70 D0 4D E2 D4 00 D0 E5 00 00 50 E3 C8 00 00 0A D8 00 94 E5 00 00 90 E5 EC 00 90 E5", [this](memory::handle handle)
 		{
 			m_Kart_Camera_calcDraw = handle.as<decltype(m_Kart_Camera_calcDraw)>();
+		});
+
+		batch.add("Item::ItemObjGesso::stateAttacked", "F0 43 2D E9 00 40 A0 E1 02 8B 2D ED 04 D0 4D E2 00 00 A0 E1 ? ? 9F E5 45 12 D4 E5", [this](memory::handle handle)
+		{
+			m_Item_ItemObjGesso_stateAttacked = handle.as<decltype(m_Item_ItemObjGesso_stateAttacked)>();
+		});
+
+		batch.add("Item::ItemObjGesso::stateInitAttacked", "10 40 2D E9 00 40 A0 E1 00 00 A0 E1 45 02 D4 E5 00 00 50 E3", [this](memory::handle handle)
+		{
+			m_Item_ItemObjGesso_stateInitAttacked = handle.as<decltype(m_Item_ItemObjGesso_stateInitAttacked)>();
+		});
+
+		batch.add("nw::gfx::RenderContext::RenderPrimitive", "F3 41 2D E9 08 00 90 E5 ? ? 9F E5 14 10 80 E2 00 00 97 E5 ? ? ? EB", [this](memory::handle handle)
+		{
+			m_nw_gfx_RenderContext_RenderPrimitive = handle.as<decltype(m_nw_gfx_RenderContext_RenderPrimitive)>();
 		});
 		
 		batch.run(memory::ranges::c_text);

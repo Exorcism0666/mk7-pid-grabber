@@ -14,7 +14,6 @@ namespace base
 		m_Item_ItemDirector_slot_StartSlot_hook("Item::ItemDirector::slot_StartSlot", g_pointers->m_Item_ItemDirector_slot_StartSlot, reinterpret_cast<void *>(&hooks::Item_ItemDirector_slot_StartSlot)),
 		m_Effect_KartEffect_calcCameraEffectImpl_hook("Effect::KartEffect::_calcCameraEffectImpl", g_pointers->m_Effect_KartEffect_calcCameraEffectImpl, reinterpret_cast<void *>(&hooks::Effect_KartEffect_calcCameraEffectImpl)),
 		m_Effect_KartEffect_calcEnvEffect_hook("Effect::KartEffect::_calcEnvEffect", g_pointers->m_Effect_KartEffect_calcEnvEffect, reinterpret_cast<void *>(&hooks::Effect_KartEffect_calcEnvEffect)),
-		m_Effect_KartEffect_createGessoTrig_hook("Effect::KartEffect::createGessoTrig", g_pointers->m_Effect_KartEffect_createGessoTrig, reinterpret_cast<void *>(&hooks::Effect_KartEffect_createGessoTrig)),
 		m_Effect_KartEffect_createWaterOutTrig_hook("Effect::KartEffect::createWaterOutTrig", g_pointers->m_Effect_KartEffect_createWaterOutTrig, reinterpret_cast<void *>(&hooks::Effect_KartEffect_createWaterOutTrig)),
 		m_Item_ItemDirector_itemEventRecvHandler_hook("Item::ItemDirector::_itemEventRecvHandler", g_pointers->m_Item_ItemDirector_itemEventRecvHandler, reinterpret_cast<void *>(&hooks::Item_ItemDirector_itemEventRecvHandler)),
 		m_Kart_NetData_read_hook("Kart::NetData::read", g_pointers->m_Kart_NetData_read, reinterpret_cast<void *>(hooks::Kart_NetData_read))
@@ -40,7 +39,6 @@ namespace base
 		m_Item_ItemDirector_slot_StartSlot_hook.enable();
 		m_Effect_KartEffect_calcCameraEffectImpl_hook.enable();
 		m_Effect_KartEffect_calcEnvEffect_hook.enable();
-		m_Effect_KartEffect_createGessoTrig_hook.enable();
 		m_Effect_KartEffect_createWaterOutTrig_hook.enable();
 		m_Item_ItemDirector_itemEventRecvHandler_hook.enable();
 		m_Kart_NetData_read_hook.enable();
@@ -58,7 +56,6 @@ namespace base
 		m_Item_ItemDirector_slot_StartSlot_hook.disable();
 		m_Effect_KartEffect_calcCameraEffectImpl_hook.disable();
 		m_Effect_KartEffect_calcEnvEffect_hook.disable();
-		m_Effect_KartEffect_createGessoTrig_hook.disable();
 		m_Effect_KartEffect_createWaterOutTrig_hook.disable();
 		m_Item_ItemDirector_itemEventRecvHandler_hook.disable();
 		m_Kart_NetData_read_hook.disable();

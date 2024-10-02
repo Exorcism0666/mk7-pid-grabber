@@ -29,7 +29,6 @@ namespace base
 		KartInfoProxy_t kart_info_proxy;
 
         Net::NetworkEngine **m_network_engine;
-		void *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
 		void *m_Sequence_RacePage_initControl_WiFiVS;
 		void *m_Sequence_RacePage_initControl_WiFiBattle;
 		void *m_System_ProjectGameFramework_procDraw;
@@ -45,7 +44,6 @@ namespace base
 		void *m_Item_ItemDirector_slot_StartSlot;
 		void *m_Effect_KartEffect_calcCameraEffectImpl;
 		void *m_Effect_KartEffect_calcEnvEffect;
-		void *m_Effect_KartEffect_createGessoTrig;
 		void *m_Effect_KartEffect_createWaterOutTrig;
 		void *m_Sequence_BaseRacePage_drawItemIcon;
 		void *m_Kart_Vehicle_startFadeOut;
@@ -55,6 +53,9 @@ namespace base
 		void *m_System_KDPadDirector_calc;
 		void *m_Kart_NetData_read;
 		void *m_Kart_Camera_calcDraw;
+		void *m_Item_ItemObjGesso_stateAttacked;
+		void *m_Item_ItemObjGesso_stateInitAttacked;
+		void *m_nw_gfx_RenderContext_RenderPrimitive;
 	};
 
 	inline pointers *g_pointers{};

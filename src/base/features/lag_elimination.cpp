@@ -10,5 +10,5 @@ namespace base
 
         if (data->active)
             _this->kart_data.warp ^= true;
-    };
+    }
 };

@@ -48,7 +48,7 @@ namespace base
                 
                 message_box += utilities::format_output("Friend Code", utilities::format_friendcode(utilities::pid_to_fc(player.principal_id)), true);
 
-                utilities::pop_up(Color::DodgerBlue << player.name, message_box, true);
+                utilities::popup(Color::DodgerBlue << player.name, message_box, true);
             }
         }
     }

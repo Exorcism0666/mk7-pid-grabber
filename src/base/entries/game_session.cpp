@@ -10,7 +10,7 @@ namespace base
 {
     void entries::game_session(MenuEntry *entry)
     {
-        if ((*g_pointers->m_network_engine)->local_player_id != UINT32_MAX && utilities::get_player_amount(true) != 0)
+        if ((*g_pointers->m_network_engine)->local_player_id != UINT32_MAX && utilities::get_player_amount(true) != 0 && utilities::is_online())
         {
             auto list = utilities::get_player_list();
 
@@ -135,7 +135,7 @@ namespace base
                         
                         message_box += utilities::format_output("Friend Code", utilities::format_friendcode(utilities::pid_to_fc(principal_id)), true);
                         
-                        utilities::pop_up(Color::DodgerBlue << player.info.name, message_box, true);
+                        utilities::popup(Color::DodgerBlue << player.info.name, message_box, true);
                     }
                     else
                         utilities::print_error(std::format("Error: Retrieving Principal ID (Game Session) | Station ID: {:X} | Player ID: {:d} | Name: {}", station_id, player.id, player.info.name), true);

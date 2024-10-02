@@ -26,7 +26,10 @@ namespace base
         m_disable_fpv(reinterpret_cast<void *>((u32)g_pointers->m_System_KDPadDirector_calc + 0xEC), { 0xE3A01000 }),
         m_disable_fog(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcApply + 0x770), { 0xE3A01000 }),
         m_fix_camera_draw_0(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcDraw + 0x8A4), { 0xE3A01000 }),
-        m_fix_camera_draw_1(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcDraw + 0xC04), { 0xE3A00000 })
+        m_fix_camera_draw_1(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcDraw + 0xC04), { 0xE3A00000 }),
+        m_disable_blooper_0(reinterpret_cast<void *>((u32)g_pointers->m_Item_ItemObjGesso_stateAttacked + 0x148), { 0xE3A00000 }),
+        m_disable_blooper_1(reinterpret_cast<void *>((u32)g_pointers->m_Item_ItemObjGesso_stateInitAttacked + 0xC), { 0xE3A00001 }),
+        m_load_course_model(reinterpret_cast<void *>((u32)g_pointers->m_nw_gfx_RenderContext_RenderPrimitive + 0xD0), { 0xE3A01001 })
     {
         g_patches = this;
     }
