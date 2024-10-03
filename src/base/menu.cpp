@@ -176,6 +176,9 @@ namespace base
         {
             if (spectator_mode.toggle && utilities::is_online())
             {
+                if (!g_patches->m_force_default_camera.is_enabled())
+                    g_patches->m_force_default_camera.enable();
+
                 if (spectator_mode.reset && !utilities::is_spectating())
                     data->reset = true;
 
@@ -210,6 +213,9 @@ namespace base
 
             if (!spectator_mode.toggle && data->active)
             {
+                if (!g_menu->m_backwards_camera_entry->IsActivated())
+                    g_patches->m_force_default_camera.disable();
+
                 g_patches->m_disable_oob_camera.disable();
                 g_patches->m_disable_fade_out_0.disable();
                 g_patches->m_disable_fade_out_1.disable();
