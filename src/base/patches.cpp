@@ -31,7 +31,8 @@ namespace base
         m_disable_blooper_1(reinterpret_cast<void *>((u32)g_pointers->m_Item_ItemObjGesso_stateInitAttacked + 0xC), { 0xE3A00001 }),
         m_load_course_model(reinterpret_cast<void *>((u32)g_pointers->m_nw_gfx_RenderContext_RenderPrimitive + 0xD0), { 0xE3A01001 }),
         m_disable_item_on_x(reinterpret_cast<void *>((u32)g_pointers->m_Item_ItemDirector_calcKeyInput_EachPlayer + 0x80), { 0 }),
-        m_disable_camera_fade(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcGndEvade + 0xFB8), { 0 })
+        m_disable_camera_fade(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcGndEvade + 0xFB8), { 0 }),
+        m_force_default_camera(reinterpret_cast<void *>((u32)g_pointers->m_Kart_Camera_calcApply + 0x240), { 0xE3A01000 })
     {
         g_patches = this;
     }

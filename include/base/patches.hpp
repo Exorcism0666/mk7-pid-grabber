@@ -36,6 +36,7 @@ namespace base
         memory::patch<u32> m_load_course_model;
         memory::patch<u32> m_disable_item_on_x;
         memory::patch<u32> m_disable_camera_fade;
+        memory::patch<u32> m_force_default_camera;
     };
 
     inline patches *g_patches{};

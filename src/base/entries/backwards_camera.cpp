@@ -16,6 +16,7 @@ namespace base
             g_patches->m_disable_item_on_x.enable();
             g_patches->m_load_course_model.enable();
             g_patches->m_disable_camera_fade.enable();
+            g_patches->m_force_default_camera.enable();
         }
         
         if (!entry->IsActivated())
@@ -26,6 +27,7 @@ namespace base
             g_patches->m_disable_item_on_x.disable();
             g_patches->m_load_course_model.disable();
             g_patches->m_disable_camera_fade.disable();
+            g_patches->m_force_default_camera.disable();
 
             (*g_pointers->m_camera_matrix)->orientation = +50.f;
         }
