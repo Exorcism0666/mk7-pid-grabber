@@ -37,6 +37,7 @@ namespace base
         CTRPluginFramework::MenuEntry *m_opponent_list_entry;
         CTRPluginFramework::MenuEntry *m_session_logger_entry;
         CTRPluginFramework::MenuEntry *m_spectator_mode_entry;
+        CTRPluginFramework::MenuEntry *m_backwards_camera_entry;
         CTRPluginFramework::MenuEntry *m_render_optimizations_entry;
         CTRPluginFramework::MenuEntry *m_load_rankboard_entry;
         CTRPluginFramework::MenuEntry *m_show_mii_heads_entry;

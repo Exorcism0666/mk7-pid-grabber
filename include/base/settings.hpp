@@ -30,6 +30,7 @@ namespace base
 			}
 			spectator_mode;
 
+			bool backwards_camera{ false };
 			bool render_optimizations{ false };
 			bool load_rankboard{ false };
 			bool show_mii_heads{ false };

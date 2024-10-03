@@ -1,6 +1,5 @@
 #include <base/features.hpp>
 
-#include <base/pointers.hpp>
 #include <base/menu.hpp>
 
 namespace base

@@ -101,6 +101,8 @@ namespace base
 		batch.add("Kart::Camera::calcApply", "F0 41 2D E9 00 40 A0 E1 01 70 A0 E1 06 8B 2D ED 50 D0 4D E2 D4 00 D0 E5 00 00 50 E3", [this](memory::handle handle)
 		{
 			m_Kart_Camera_calcApply = handle.as<decltype(m_Kart_Camera_calcApply)>();
+
+			m_camera_matrix = handle.add(0x348).as<decltype(m_camera_matrix)>();
 		});
 
 		batch.add("Kart::InfoProxy::InfoProxy", "1C 00 90 E5 10 00 90 E5 ? ? ? EB 00 00 84 E5 04 00 A0 E1 10 80 BD E8", [this](memory::handle handle)
@@ -181,6 +183,16 @@ namespace base
 		batch.add("nw::gfx::RenderContext::RenderPrimitive", "F3 41 2D E9 08 00 90 E5 ? ? 9F E5 14 10 80 E2 00 00 97 E5 ? ? ? EB", [this](memory::handle handle)
 		{
 			m_nw_gfx_RenderContext_RenderPrimitive = handle.as<decltype(m_nw_gfx_RenderContext_RenderPrimitive)>();
+		});
+
+		batch.add("Item::ItemDirector::_calcKeyInput_EachPlayer", "F8 4F 2D E9 00 40 A0 E1 01 50 A0 E1 C0 00 90 E5 05 00 50 E1", [this](memory::handle handle)
+		{
+			m_Item_ItemDirector_calcKeyInput_EachPlayer = handle.as<decltype(m_Item_ItemDirector_calcKeyInput_EachPlayer)>();
+		});
+
+		batch.add("Kart::Camera::calcGndEvade", "F3 4F 2D E9 00 40 A0 E1 ? ? 9F E5 02 8B 2D ED 8C D0 4D E2 24 02 D0 E5 98 50 9D E5 ? ? 9F ED", [this](memory::handle handle)
+		{
+			m_Kart_Camera_calcGndEvade = handle.as<decltype(m_Kart_Camera_calcGndEvade)>();
 		});
 		
 		batch.run(memory::ranges::c_text);

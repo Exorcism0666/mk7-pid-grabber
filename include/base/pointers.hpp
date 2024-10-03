@@ -29,6 +29,8 @@ namespace base
 		KartInfoProxy_t kart_info_proxy;
 
         Net::NetworkEngine **m_network_engine;
+		CameraMatrix **m_camera_matrix;
+
 		void *m_Sequence_RacePage_initControl_WiFiVS;
 		void *m_Sequence_RacePage_initControl_WiFiBattle;
 		void *m_System_ProjectGameFramework_procDraw;
@@ -56,6 +58,8 @@ namespace base
 		void *m_Item_ItemObjGesso_stateAttacked;
 		void *m_Item_ItemObjGesso_stateInitAttacked;
 		void *m_nw_gfx_RenderContext_RenderPrimitive;
+		void *m_Item_ItemDirector_calcKeyInput_EachPlayer;
+		void *m_Kart_Camera_calcGndEvade;
 	};
 
 	inline pointers *g_pointers{};

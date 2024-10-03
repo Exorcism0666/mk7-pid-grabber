@@ -16,5 +16,7 @@ namespace base
 		static void show_mii_heads(CTRPluginFramework::MenuEntry *);
 		static void items_on_extended_map(CTRPluginFramework::MenuEntry *);
 		static void pid_display_settings(CTRPluginFramework::MenuEntry *);
+
+		static void backwards_camera(CTRPluginFramework::MenuEntry *);
 	};
 }

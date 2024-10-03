@@ -21,6 +21,8 @@ using namespace CTRPluginFramework;
     #define MENU_TYPE 1
 #endif
 
+#define FEATURES_FOLDER_NOTE Color::SkyBlue << "This folder contains additional features."
+
 #define GAME_SESSION_NOTE Color::SkyBlue << "This fetches the current players inside an active game session or current lobby.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define OPPONENT_LIST_NOTE Color::SkyBlue << "This fetches only the opponent list from your save data, excluding the friend list.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define RENDER_OPTIMIZATIONS_NOTE Color::SkyBlue << "This entry disables the 3D and uncaps the FPS on the bottom screen during races."
@@ -30,8 +32,7 @@ using namespace CTRPluginFramework;
 #define PID_SETTINGS_NOTE Color::SkyBlue << "This entry allows changing how the Principal ID gets displayed.\n\n" << Color::DodgerBlue << "Press \uE000 for more info and options."
 #define SPECTATOR_NOTE Color::SkyBlue << "This entry puts you into spectator mode.\nPress \uE07C / \uE07B to swap, \uE079 to reset it.\n\n" << Color::Orange << "You can't undo it until the next race."
 #define ITEMS_ON_MAP_NOTE Color::SkyBlue << "This entry displays people's items on the extended minimap."
-
-#define FEATURES_FOLDER_NOTE Color::SkyBlue << "This folder contains additional features."
+#define BACKWARDS_CAM_NOTE Color::SkyBlue << "This entry allows you to look backwards.\nPress \uE002 to trigger it.\n\n" << Color::Orange << "This disables item usage on \uE002."
 
 namespace base
 {
@@ -43,6 +44,7 @@ namespace base
         m_opponent_list_entry(new MenuEntry("Opponent List", nullptr, entries::opponent_list, OPPONENT_LIST_NOTE)),
         m_session_logger_entry(new MenuEntry("Session Logger", nullptr, entries::session_logger, SESSION_LOGGER_NOTE)),
         m_spectator_mode_entry(new MenuEntry("Spectator Mode", nullptr, entries::spectator_mode, SPECTATOR_NOTE)),
+        m_backwards_camera_entry(new MenuEntry("Backwards Camera", entries::backwards_camera, BACKWARDS_CAM_NOTE)),
         m_render_optimizations_entry(new MenuEntry("Render Optimizations", entries::render_optimizations, RENDER_OPTIMIZATIONS_NOTE)),
         m_load_rankboard_entry(new MenuEntry("Load Live View Rankboard", entries::toggle_rankboard, LIVE_RANKBOARD_NOTE)),
         m_show_mii_heads_entry(new MenuEntry("Mii Heads On Vote/Bottom Screen", entries::show_mii_heads, MII_HEADS_NOTE)),
@@ -74,13 +76,22 @@ namespace base
 
         m_plugin_menu->OnOpening = []()
         {
-            Sleep(Milliseconds(100));
-
 #ifdef _DEBUG
             return true;
 #endif
+
+            Sleep(Milliseconds(100));
+
+            if (utilities::is_online() && utilities::is_in_race(true))
+            {
+                auto entry = g_menu->m_game_session_entry;
+
+                entry->GetMenuFunc()(entry);
+
+                return false;
+            }
             
-            return !utilities::is_in_race(true);
+            return true;
         };
 
         m_plugin_menu->Callback(manage_data);
@@ -119,6 +130,7 @@ namespace base
         if (auto folder = new MenuFolder("Additional Features", FEATURES_FOLDER_NOTE))
         {
             *folder += m_spectator_mode_entry;
+            *folder += m_backwards_camera_entry;
             *folder += m_render_optimizations_entry;
             *folder += m_load_rankboard_entry;
             *folder += m_show_mii_heads_entry;
@@ -135,6 +147,9 @@ namespace base
         *GetArg<menu_types::spectator_mode>(m_spectator_mode_entry) = { false, false, false, UINT8_MAX };
 
         g_patches->m_disable_title_demo.enable();
+
+        if (g_settings.m_options.backwards_camera)
+            m_backwards_camera_entry->Enable();
         
         if (g_settings.m_options.render_optimizations)
             m_render_optimizations_entry->Enable();
@@ -176,7 +191,6 @@ namespace base
                     g_patches->m_fix_camera_draw_1.enable();
                     g_patches->m_disable_blooper_0.enable();
                     g_patches->m_disable_blooper_1.enable();
-                    g_patches->m_load_course_model.enable();
 
                     data->active = true;
                 }
@@ -184,6 +198,9 @@ namespace base
         }
         else
         {
+            if ((*g_pointers->m_camera_matrix)->orientation != +50.f)
+                (*g_pointers->m_camera_matrix)->orientation = +50.f;
+
             if (spectator_mode.toggle && data->reset)
             {
                 spectator_mode.toggle = false;
@@ -203,7 +220,6 @@ namespace base
                 g_patches->m_fix_camera_draw_1.disable();
                 g_patches->m_disable_blooper_0.disable();
                 g_patches->m_disable_blooper_1.disable();
-                g_patches->m_load_course_model.disable();
 
                 *data = { false, false, false, UINT8_MAX };
             }

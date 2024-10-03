@@ -34,6 +34,8 @@ namespace base
         memory::patch<u32> m_disable_blooper_0;
         memory::patch<u32> m_disable_blooper_1;
         memory::patch<u32> m_load_course_model;
+        memory::patch<u32> m_disable_item_on_x;
+        memory::patch<u32> m_disable_camera_fade;
     };
 
     inline patches *g_patches{};

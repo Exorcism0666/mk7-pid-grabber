@@ -10,6 +10,8 @@ namespace base
 
         features::swap_camera(_this);
 
+        features::change_camera(_this);
+
         g_hooking->m_Kart_Camera_calcApply_hook.call_original<void>(_this, unk0, unk1, unk2, unk3);
     }
 }

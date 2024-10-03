@@ -257,11 +257,26 @@ namespace Kart
         u16 camera_target_id;
     };
 
+    struct Camera
+    {
+        u8 gap0[0xD4];
+        bool is_master;
+        struct InfoProxy *info_proxy;
+        u8 gap1[0x180];
+        float evade;
+    };
+
+    struct InfoProxy
+    {
+        struct Vehicle *vehicle;
+    };
+
     struct Vehicle
     {
         u8 gap0[0x78];
         Director *director;
-        u8 gap1[8];
+        u8 gap1[4];
+        Camera *camera;
         u16 player_id;
         u8 gap2[0x12];
         bool is_master;
@@ -271,18 +286,6 @@ namespace Kart
         bool is_net_recv;
         u8 gap5[7];
         bool is_goal;
-    };
-
-    struct InfoProxy
-    {
-        Vehicle *vehicle;
-    };
-
-    struct Camera
-    {
-        u8 gap0[0xD4];
-        bool is_master;
-        InfoProxy *info_proxy;
     };
 
     struct VehicleReact : Vehicle
@@ -356,4 +359,10 @@ struct RaceCheck
 {
     u8 gap0[0x18];
     RaceCheckState state;
+};
+
+struct CameraMatrix
+{
+    u8 gap0[0xC];
+    float orientation;
 };

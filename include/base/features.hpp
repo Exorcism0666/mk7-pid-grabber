@@ -18,5 +18,6 @@ namespace base
 		static bool ignore_vehicle(Kart::Vehicle *);
 		static bool check_item_event(Net::NetworkItemEventDataMgr::SlotData *);
 		static void lag_elimination(Kart::NetData *);
+		static void change_camera(Kart::Camera *);
 	};
 }
