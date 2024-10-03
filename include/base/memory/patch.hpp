@@ -14,11 +14,13 @@ namespace base::memory
 
         void enable();
         void disable();
+        bool is_enabled() { return enabled; }
 
     private:
         T *m_address;
         std::vector<T> m_new_value;
         std::vector<T> m_original_value;
+        bool enabled;
     };
 
     template <typename T>
@@ -42,11 +44,15 @@ namespace base::memory
     void patch<T>::enable()
     {
         std::copy_n(m_new_value.data(), m_new_value.size(), m_address);
+
+        enabled = true;
     }
 
     template <typename T>
     void patch<T>::disable()
     {
         std::copy_n(m_original_value.data(), m_original_value.size(), m_address);
+
+        enabled = false;
     }
 }
