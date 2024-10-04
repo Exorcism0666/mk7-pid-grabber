@@ -1,0 +1,25 @@
+name: Makefile CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: pablomk7/libctrpf:0.7.4
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Plugin
+        run: make re
+
+      - name: Upload Plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: mk7-pid-grabber.3gx
+          path: mk7-pid-grabber.3gx
